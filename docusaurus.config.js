@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Husarnet Docs',
-  tagline: 'The tagline of my site',
+  tagline: 'Husarnet documentation',
   url: 'https://docs.husarnet.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
