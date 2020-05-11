@@ -8,10 +8,10 @@ module.exports = {
   projectName: 'husarnet-docs', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Husarnet',
+      title: 'husarnet DOCS',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'Husarnet',
+        src: 'img/husarnet_signet.svg',
       },
       links: [
         {
@@ -21,6 +21,12 @@ module.exports = {
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
+        {
+          to: 'docs/install-linux',
+          activeBasePath: 'docs',
+          label: 'Getting Started',
+          position: 'left',
+        },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
