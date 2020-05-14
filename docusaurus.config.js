@@ -7,24 +7,38 @@ module.exports = {
   organizationName: 'husarnet', // Usually your GitHub org/user name.
   projectName: 'husarnet-docs', // Usually your repo name.
   themeConfig: {
+    disableDarkMode: false,
+    // announcementBar: {
+    //   id: 'support_us', // Any value that will identify this message
+    //   content:
+    //     'We are looking to revamp our docs, please fill <a target="_blank" rel="noopener noreferrer" href="#">this survey</a>',
+    //   backgroundColor: '#fafbfc', // Defaults to `#fff`
+    //   textColor: '#091E42', // Defaults to `#000`
+    // },
     navbar: {
       title: 'husarnet DOCS',
       logo: {
         alt: 'Husarnet',
         src: 'img/husarnet_signet.svg',
       },
-      links: [        
+      links: [      
         {
-          to: 'docs/install-linux',
+          to: 'docs/begin-linux',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
-        },
+        },  
         {to: 'blog', label: 'Blog', position: 'left'},
         {
           to: 'docs/test/doc1',
           activeBasePath: 'docs/test',
           label: 'Test',
+          position: 'left',
+        },
+        {
+          to: 'docs/old/install-linux',
+          activeBasePath: 'docs/old',
+          label: 'Old',
           position: 'left',
         },
         {
@@ -99,4 +113,5 @@ module.exports = {
       },
     ],
   ],
+  // themes: ['@docusaurus/theme-classic', '@docusaurus/theme-live-codeblock'],
 };

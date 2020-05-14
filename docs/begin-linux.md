@@ -1,7 +1,7 @@
 ---
 sidebar_label: Linux
-title: Install Husarnet on Linux
-custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/old/install-linux
+title: Use Husarnet on Linux
+custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/begin-linux
 keywords:
   - vpn
   - p2p
@@ -16,7 +16,7 @@ The simplest way to install Husarnet is to paste the following line to your term
 curl https://install.husarnet.com/install.sh | sudo bash
 ```
 
-That's all. You can now continue to the [getting started](/getting-started/) tutorial.
+That's all. You can now continue to the [getting started](/old/getting-started/) tutorial.
 
 This method works on APT and Yum based Linux distributions such as Debian, Ubuntu, CentOS, RHEL, Fedora or Mint.
 

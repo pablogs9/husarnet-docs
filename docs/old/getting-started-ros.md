@@ -13,11 +13,11 @@ First, install Husarnet by pasting the following line into your terminal:
 curl https://install.husarnet.com/install.sh | sudo bash
 ```
 
-You can learn about [other installation methods](/old/install-linux/).
+You can learn about [other installation methods](/install-linux/).
 
 ## Managing networks
 
-Right after installing Husarnet, you should link the device to your Husarnet Dashboard account. (You can also [manage your device manually](/old/manual-mgmt/), but that's recommended only in special cases).
+Right after installing Husarnet, you should link the device to your Husarnet Dashboard account. (You can also [manage your device manually](/manual-mgmt/), but that's recommended only in special cases).
 
 ```
 sudo husarnet websetup
