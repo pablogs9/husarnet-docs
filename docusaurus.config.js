@@ -13,18 +13,18 @@ module.exports = {
         alt: 'Husarnet',
         src: 'img/husarnet_signet.svg',
       },
-      links: [
+      links: [        
         {
-          to: 'docs/doc1',
+          to: 'docs/install-linux',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {
-          to: 'docs/install-linux',
-          activeBasePath: 'docs',
-          label: 'Getting Started',
+          to: 'docs/test/doc1',
+          activeBasePath: 'docs/test',
+          label: 'Test',
           position: 'left',
         },
         {
@@ -38,15 +38,15 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Test',
           items: [
             {
               label: 'Style Guide',
-              to: 'docs/doc1',
+              to: 'docs/test/doc1',
             },
             {
               label: 'Second Doc',
-              to: 'docs/doc2',
+              to: 'docs/test/doc2',
             },
           ],
         },
