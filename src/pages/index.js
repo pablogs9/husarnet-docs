@@ -60,17 +60,24 @@ function Home() {
       description="Description will go into a meta tag in <head />">
       <header className={classnames('hero hero--dark', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={styles.buttons}>
-            <Link
-              className={classnames(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('test/doc1')}>
-              Get Started
-            </Link>
+          <div className="row">
+            <div className="col">
+              <h1 className="hero__title">{siteConfig.title}</h1>
+              <p className="hero__subtitle">{siteConfig.tagline}</p>
+              <div className={styles.buttons}>
+                <Link
+                  className={classnames(
+                   'button button--primary button--lg',
+                   styles.getStarted,
+                 )}
+                  to={useBaseUrl('docs/begin-linux')}>
+                  Get Started
+                </Link>
+              </div>
+            </div>
+            <div className="col">
+              <img className={styles.heroImg} src="img/connect_devices.png" />
+            </div>
           </div>
         </div>
       </header>

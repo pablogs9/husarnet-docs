@@ -12,7 +12,8 @@ image: https://i.imgur.com/mErPwqL.png
 
 The simplest way to install Husarnet is to paste the following line to your terminal:
 
-```
+https://prismjs.com/#supported-languages
+```bash
 curl https://install.husarnet.com/install.sh | sudo bash
 ```
 

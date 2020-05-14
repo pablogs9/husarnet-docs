@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Husarnet Docs',
-  tagline: 'Husarnet documentation',
+  title: 'Husarnet',
+  tagline: 'Low latency, privacy preserving, lightweight VPN.',
   url: 'https://docs.husarnet.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -15,6 +15,14 @@ module.exports = {
     //   backgroundColor: '#fafbfc', // Defaults to `#fff`
     //   textColor: '#091E42', // Defaults to `#000`
     // },
+
+    //https://v2.docusaurus.io/docs/theme-classic/#theme
+    prism: {
+      defaultLanguage: 'bash',
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
+    },
+
     navbar: {
       title: 'husarnet DOCS',
       logo: {
@@ -95,7 +103,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Husarnet sp. z o.o.`,
     },
   },
   presets: [
