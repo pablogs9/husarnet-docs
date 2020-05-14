@@ -12,9 +12,9 @@ This quick start guide describes how to install **Husarnet VPN Client** software
 
 ## I. Create a network
 
-Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button
+Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button.
 
-## II. Find a join code
+## II. Get a join code
 
 Click **Add element** button, select **join code** tab and copy your join code that looks like this: 
 ```
@@ -50,3 +50,4 @@ To ssh to other devices within Husarnet network you can use their hostnames as w
 ssh username@mylaptop
 ```
 
+<TODO: jak np. napisać prosty kod w pythonie aby połączyć 2 urządzenia>

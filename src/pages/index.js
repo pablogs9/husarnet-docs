@@ -21,7 +21,7 @@ const features = [
     imageUrl: 'img/feature_latency.svg',
     description: (
       <>
-        Devices communicate directly through the internet, using lowest latency path. If your devices are in the single network the traffic between them goes only within that network.
+        Devices communicate over the internet, using lowest latency path. If your devices are in the single network the traffic between them goes only within that network.
       </>
     ),
   },

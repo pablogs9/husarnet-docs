@@ -1,13 +1,22 @@
 module.exports = {
   title: 'Husarnet',
-  tagline: 'Low latency, privacy preserving, lightweight VPN.',
+  tagline: 'Low latency, lightweight, privacy preserving VPN.',
   url: 'https://docs.husarnet.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'husarnet', // Usually your GitHub org/user name.
   projectName: 'husarnet-docs', // Usually your repo name.
+  
+  plugins: ['@docusaurus/plugin-google-analytics'],
+  
   themeConfig: {
     disableDarkMode: false,
+
+    googleAnalytics: {
+      trackingID: 'UA-51095182-4',
+      // Optional fields.
+      anonymizeIP: true, // Should IPs be anonymized?
+    },
     // announcementBar: {
     //   id: 'support_us', // Any value that will identify this message
     //   content:
@@ -60,45 +69,54 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Test',
+          title: 'Company',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/test/doc1',
+              label: 'Pricing',
+              to: 'http://upload.pureinteractive.pl/husarnet/pricing.html',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/test/doc2',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'About Us',
+              to: 'https://husarnet.com',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Terms Of Service',
+              to: 'https://app.husarnet.com/tos',
             },
-          ],
-        },
-        {
-          title: 'Social',
-          items: [
             {
               label: 'Blog',
-              to: 'blog',
+              to: '/blog',
+            },
+            
+          ],
+        },
+        {
+          title: 'Developers',
+          items: [
+            {
+              label: 'Documentation',
+              href: '/',
             },
             {
+              label: 'Community Forum',
+              href: 'https://discordapp.com/invite/docusaurus',
+            },
+            {
+              label: 'Husarnet Dashboard',
+              href: 'https://app.husarnet.com',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/husarnet',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/husarnet',
             },
           ],
         },
