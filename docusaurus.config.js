@@ -37,6 +37,7 @@ module.exports = {
       logo: {
         alt: 'Husarnet',
         src: 'img/husarnet_signet.svg',
+        href: 'https://docs.husarnet.com',
       },
       links: [      
         {
