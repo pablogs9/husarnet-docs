@@ -27,7 +27,7 @@ module.exports = {
 
     //https://v2.docusaurus.io/docs/theme-classic/#theme
     prism: {
-      defaultLanguage: 'bash',
+      defaultLanguage: 'bash',  //https://prismjs.com/#supported-languages
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
