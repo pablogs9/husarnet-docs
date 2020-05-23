@@ -8,11 +8,17 @@ keywords:
 image: https://i.imgur.com/mErPwqL.png
 ---
 
+:::info
+Husarnet VPN Client can run not only on servers, laptops or mobile phones (soon), but also on microcontrollers with very limited computing power and memory. Thanks to that you can have in a single VPN network not only computers, but also cheap and low-power Wi-Fi sensors/actuators without any additional server or bridge in between. In other words you can build IoT network connected to your computer without any kind of IoT API cloud in between. You can send messages directly to your Wi-Fi chips and this guide will show you how to do that.
+:::
+
 This quick start guide describes how to use **Husarnet VPN Client** software library on ESP32 Wi-Fi microcontrollers and how to configure a network using **Husarnet Dashboard** in a few easy steps.
 
 ## I. Create a network
 
 Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button.
+
+![create network](/img/getting-started/docs-create-network.png)
 
 ## II. Get a join code
 
@@ -20,6 +26,8 @@ Click **Add element** button, select **join code** tab and copy your join code t
 ```
 fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 ```
+
+![find joincode](/img/getting-started/docs-joincode.png)
 
 ## III. Configure Arduino IDE environment
 
@@ -33,9 +41,14 @@ Open Arduino IDE and install the fork of **Arduino core for the ESP32** by follo
 ```
 https://files.husarion.com/arduino/package_esp32_index.json
 ```
+
+![Board Manager URL](/img/getting-started/docs-arduino-url.png)
+
 - go to `Tools -> Board: ... -> Boards Manager ...`
 - Search for `esp32-husarnet` by Husarion
 - Click install button
+
+![ESP32 board install](/img/getting-started/docs-arduino-board.png)
 
 ### 3. Select ESP32 dev board:
 
@@ -112,7 +125,10 @@ void loop()
     }
 }
 ```
-Then upload the code to ESP32.
+Then build the project.
+![Build project](/img/getting-started/docs-arduino-build.png)
+
+And upload the code to your ESP32.
 
 ### Python server code
 
@@ -146,6 +162,10 @@ Husarnet runs on top of both IPv4 and IPv6 networks but creates only IPv6 overla
 If you want to connect your existing code over the internet remember to change all setting to use IPv6 network like `socket.AF_INET6` in the example above.
 :::
 
+:::tip Read if you face errors during project build
+1. In some configurations you may face issues with other existing Wi-Fi libraries. The simplest way to fix that is to remove ...
 
+
+:::
 
 ## V. Demo no. 2 (advanced)

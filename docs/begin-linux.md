@@ -14,12 +14,16 @@ This quick start guide describes how to install **Husarnet VPN Client** software
 
 Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button.
 
+![create network](/img/getting-started/docs-create-network.png)
+
 ## II. Get a join code
 
 Click **Add element** button, select **join code** tab and copy your join code that looks like this: 
 ```
 fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 ```
+
+![find joincode](/img/getting-started/docs-joincode.png)
 
 ## III. Install Husarnet Client app
 
