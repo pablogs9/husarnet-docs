@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'Low latency, lightweight, privacy preserving VPN.',
   url: 'https://docs.husarnet.com',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon-96x96.png',
   organizationName: 'husarnet', // Usually your GitHub org/user name.
   projectName: 'husarnet-docs', // Usually your repo name.
   
