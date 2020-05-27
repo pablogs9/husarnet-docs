@@ -180,11 +180,11 @@ Here is a list of improvements:
 
 Typical IoT devices act only as clients connecting to a central server with a static IP address. Husarnet allows you to have a completely new approach for creating your own internet connected devices. They can act both as a server and as a client even with no static and public IP needed.
 
-![Old IoT](/img/iot_old.png)
+![Old IoT](/img/getting-started/iot_old.png)
 
 Thanks to that approach your sensor can be running the whole time with no additional server needed and you can connect from a level of your laptop to it directly over the internet whenever you want.
 
-![Old IoT](/img/iot_new.png)
+![Old IoT](/img/getting-started/iot_new.png)
 
 ### ESP32 client code
 
@@ -459,6 +459,9 @@ void loop()
   delay(5000);
 }
 ```
+
+### Web page hosted by ESP32
+![web UI ESP32](/img/getting-started/esp32-webpage.png)
 
 ### Python server code
 
