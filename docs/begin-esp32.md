@@ -164,8 +164,368 @@ If you want to connect your existing code over the internet remember to change a
 
 :::tip Read if you face errors during project build
 1. In some configurations you may face issues with other existing Wi-Fi libraries. The simplest way to fix that is to remove ...
-
-
 :::
 
 ## V. Demo no. 2 (advanced)
+
+Demo no. 1 was really basic. Now let's create something that could be a good starting point for a real IoT project working on ESP32 board and Husarnet!
+
+Here is a list of improvements:
+- use **websockets** that are very handy to use in JavaScript and Python
+- use **JSON** for data serialization and to provide elegant API
+- add **JSON API** for changing parameters of ESP32
+- host simple **web server** on the ESP32
+- create a Python3 script that will save data in the **SQLite database**
+- make ESP32 to act as **a server**, not as a client
+
+Typical IoT devices act only as clients connecting to a central server with a static IP address. Husarnet allows you to have a completely new approach for creating your own internet connected devices. They can act both as a server and as a client even with no static and public IP needed.
+
+![Old IoT](/img/iot_old.png)
+
+Thanks to that approach your sensor can be running the whole time with no additional server needed and you can connect from a level of your laptop to it directly over the internet whenever you want.
+
+![Old IoT](/img/iot_new.png)
+
+### ESP32 client code
+
+At first, clone [husarnet-esp32-default project from GitHub](https://github.com/DominikN/husarnet-esp32-default) containging the following files:
+
+- **husarnet-esp32-default.ino** with a main code
+- **html.h and default_js.h** header files containging a c-string tables with HTML and JS code of a server hosted by ESP32
+- **lut.cpp and lut.h** - library to generate a fake data. Replace this with the real sensor data after finishing this first start guide.
+
+There is also a **python** folder containing a code that will be executed on your laptop side.
+
+#### Install ArduinoJson and arduinoWebSockets libarty in Arduino IDE
+**Install ArduinoJson library:**
+
+- open `Tools -> Manage Libraries...`
+- search for `ArduinoJson`
+- select version `5.13.3`
+- click install button
+
+**Install arduinoWebSockets library (Husarnet fork):**
+
+- download https://github.com/husarnet/arduinoWebSockets as a ZIP file (this is Husarnet compatible fork of arduinoWebSockets by Links2004 (Markus) )
+- open `Sketch -> Include Library -> Add .ZIP Library ... `
+- choose `arduinoWebSockets-master.zip` file that you just downloaded and click open button
+
+
+#### Add your own Wi-Fi and Husarnet credentials
+in **husarnet-esp32-default.ino** file replace `wifi-ssid-1` and `wifi-pass-for-ssid-1` by your Wi-Fi credentials and also replace a joincode by your own, obtained in [section II](/docs/begin-esp32#ii-get-a-join-code)):
+
+```cpp
+#include <WiFi.h>
+#include <WiFiMulti.h>
+#include <Husarnet.h>
+#include <WebSocketsServer.h>
+#include <WebServer.h>
+#include <ArduinoJson.h>
+
+#include "time.h"
+#include "lut.h"
+
+/* =============== config section start =============== */
+#define HTTP_PORT 8000
+#define WEBSOCKET_PORT 8001
+
+#if __has_include("credentials.h")
+#include "credentials.h"
+#else
+
+// WiFi credentials
+#define NUM_NETWORKS 2
+const char* ssidTab[NUM_NETWORKS] = {
+  "wifi-ssid-1",
+  "wifi-ssid-2",
+};
+const char* passwordTab[NUM_NETWORKS] = {
+  "wifi-pass-for-ssid-1",
+  "wifi-pass-for-ssid-2",
+};
+
+// Husarnet credentials
+const char* hostName = "esp32basic";
+const char* husarnetJoinCode = "fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/xxxxxxxxxxxxxxxxxxxxxx";
+
+#endif
+/* =============== config section end =============== */
+
+// NTP settings
+const char* ntpServer = "pool.ntp.org";
+const long  gmtOffset_sec = 3600;
+const int   daylightOffset_sec = 3600;
+
+// HTTP server on port 8000
+WebServer server(HTTP_PORT);
+
+// websocket server on port 8001
+WebSocketsServer webSocket = WebSocketsServer(WEBSOCKET_PORT);
+
+// you can provide credentials to multiple WiFi networks
+WiFiMulti wifiMulti;
+
+// JSON documents
+//https://arduinojson.org/v5/assistant/
+StaticJsonDocument<100> jsonDocRx;  // {"set_output":"sine"}
+StaticJsonDocument<200> jsonDocTx;  // {"timestamp":1000000000, "output_type":"sine", "value":129}
+
+// global variable to store a current waveform type to be sent over websocket
+String modeName = "sine"; //"square", "triangle", "none"
+
+SemaphoreHandle_t sem = NULL;
+
+// HTML and JS files for HTTP server on port 8000
+const char* html =
+#include "html.h"
+  ;
+const char* default_js =
+#include "default_js.h"
+  ;
+
+// get local time - synchronisation with NTP server
+bool getTime(time_t& rawtime) {
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) {
+    Serial.println("Failed to obtain time");
+    return 0;
+  } else {
+    rawtime = mktime(&timeinfo);
+    return 1;
+  }
+}
+
+void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t* payload, size_t length) {
+  switch (type) {
+    case WStype_DISCONNECTED:
+      Serial.printf("[%u] Disconnected\r\n", num);
+      break;
+    case WStype_CONNECTED:
+      Serial.printf("\r\n[%u] Connection from Husarnet \r\n", num);
+      break;
+
+    case WStype_TEXT:
+      {
+        Serial.printf("[%u] Text: %s\r\n", num, (char*)payload);
+
+        jsonDocRx.clear();
+        auto error = deserializeJson(jsonDocRx, payload);
+
+        if (!error) {
+          if (jsonDocRx["set_output"]) {
+            String output = jsonDocRx["set_output"];
+            if ( (output == "sine") || (output == "triangle") || (output == "square") || (output == "none")) {
+              modeName = output;
+            }
+          }
+        }
+      }
+      break;
+
+    case WStype_BIN:
+    case WStype_ERROR:
+    case WStype_FRAGMENT_TEXT_START:
+    case WStype_FRAGMENT_BIN_START:
+    case WStype_FRAGMENT:
+    case WStype_FRAGMENT_FIN:
+    default:
+      break;
+  }
+}
+
+void onHttpReqFunc() {
+  server.sendHeader("Connection", "close");
+  server.send(200, "text/html", html);
+}
+
+void taskWifi( void * parameter );
+void taskStatus( void * parameter );
+
+void setup()
+{
+  Serial.begin(115200);
+
+  sem = xSemaphoreCreateMutex();
+  xSemaphoreTake(sem, ( TickType_t)portMAX_DELAY);
+
+  xTaskCreate(
+    taskWifi,          /* Task function. */
+    "taskWifi",        /* String with name of task. */
+    20000,            /* Stack size in bytes. */
+    NULL,             /* Parameter passed as input of the task */
+    1,                /* Priority of the task. */
+    NULL);            /* Task handle. */
+
+  xTaskCreate(
+    taskStatus,          /* Task function. */
+    "taskStatus",        /* String with name of task. */
+    20000,            /* Stack size in bytes. */
+    NULL,             /* Parameter passed as input of the task */
+    1,                /* Priority of the task. */
+    NULL);            /* Task handle. */
+}
+
+void taskWifi( void * parameter ) {
+  uint8_t stat = WL_DISCONNECTED;
+
+  /* Configure Wi-Fi */
+  for (int i = 0; i < NUM_NETWORKS; i++) {
+    wifiMulti.addAP(ssidTab[i], passwordTab[i]);
+    Serial.printf("WiFi %d: SSID: \"%s\" ; PASS: \"%s\"\r\n", i, ssidTab[i], passwordTab[i]);
+  }
+
+  while (stat != WL_CONNECTED) {
+    stat = wifiMulti.run();
+    Serial.printf("WiFi status: %d\r\n", (int)stat);
+    delay(100);
+  }
+  Serial.printf("WiFi connected\r\n", (int)stat);
+  Serial.printf("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  /* Start Husarnet */
+  Husarnet.join(husarnetJoinCode, hostName);
+  Husarnet.start();
+
+  /* Configure connection to the NTP server (get accurate time for timestamps) */
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+
+  /* Start websocket server */
+  webSocket.begin();
+  webSocket.onEvent(onWebSocketEvent);
+
+  /* Confgiure HTTP server */
+  server.on("/", HTTP_GET, onHttpReqFunc);
+  server.on("/index.html", HTTP_GET, onHttpReqFunc);
+  server.on("/default.js", HTTP_GET, []() {
+    server.sendHeader("Connection", "close");
+    server.send(200, "application/javascript", default_js);
+    xSemaphoreGive( sem );
+  });
+  server.begin();
+
+  xSemaphoreGive( sem );
+
+  while (1) {
+    // loop to handle websocket server and HTTP server
+    while (WiFi.status() == WL_CONNECTED) {
+      if (xSemaphoreTake(sem, ( TickType_t)0) == pdTRUE ) {
+        webSocket.loop();
+        server.handleClient();
+        xSemaphoreGive( sem );
+      }
+      delay(2);
+    }
+
+    Serial.printf("WiFi disconnected, reconnecting\r\n");
+    delay(500);
+    stat = wifiMulti.run();
+    Serial.printf("WiFi status: %d\r\n", (int)stat);
+  }
+}
+
+void taskStatus( void * parameter )
+{
+  time_t currentTime;
+
+  while (1) {
+    if (xSemaphoreTake(sem, ( TickType_t)portMAX_DELAY) == pdTRUE ) {
+      jsonDocTx.clear();
+      if (getTime(currentTime)) {
+        String output;
+        jsonDocTx["timestamp"] = currentTime;
+        jsonDocTx["output_type"] = modeName;
+        jsonDocTx["value"] = getLutVal(modeName);
+        serializeJson(jsonDocTx, output);
+
+        // if websocket connection is opened send JSON like {"timestamp":1000000000, "output_type":"sine", "value":129}
+        if (webSocket.sendTXT(0, output)) {
+          xSemaphoreGive( sem );
+          Serial.print(F("Sending: "));
+          Serial.print(output);
+          Serial.println();
+        } else {
+          xSemaphoreGive( sem );
+        }
+      }  
+    }
+    delay(500);
+  }
+}
+
+void loop()
+{
+  Serial.printf("[RAM: %d]\r\n", esp_get_free_heap_size());
+  delay(5000);
+}
+```
+
+### Python server code
+
+First, connect your Linux laptop to the same Husarnet network as ESP32. Follow [this guide](/docs/begin-linux) to see how to install **Husarnet Client** app and connect your laptop to the Husarnet network.
+
+In the [husarnet-esp32-default repository](https://github.com/DominikN/husarnet-esp32-default) there is a folder **Python** folder containing **db_example.py** file
+
+```python
+import sqlite3
+import asyncio
+import websockets
+import argparse
+import json
+from sqlite3 import Error
+
+conn = None
+cur = None
+sql_insert = "INSERT INTO exampledb (timestamp, output_type, value) VALUES (?, ?, ?);"
+
+async def mainfunc():
+    uri = "ws://" + args.hostname + ":8001"
+    print("connecting: " + uri)
+    async with websockets.connect(uri) as websocket:
+        tx_msg = json.dumps({"set_output":args.outputType})
+
+        print(tx_msg)
+        await websocket.send(tx_msg)
+        
+        while True:
+            rx_msg = await websocket.recv()
+            print(rx_msg)
+            rx_json = json.loads(rx_msg)
+
+            cur.execute(sql_insert, (rx_json["timestamp"],rx_json["output_type"],rx_json["value"]))
+            conn.commit()
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("hostname", nargs='?', default="esp32basic")
+    parser.add_argument("outputType", nargs='?', default="sine")
+    args = parser.parse_args()
+
+    print("hostname: ", args.hostname)
+    print("outputType: ", args.outputType)
+
+    try:
+        conn = sqlite3.connect("./exampledb.db")
+        print("sqlite version: " + sqlite3.version)
+        cur = conn.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS exampledb (timestamp, output_type, value)")
+        conn.commit()
+
+        asyncio.get_event_loop().run_until_complete(mainfunc())
+
+    except Error as e:
+        print(e)
+    except KeyboardInterrupt:
+        print("\r\nReceived exit, exiting")
+    finally:
+        print("\r\nClose database connection")
+        if conn:
+            conn.close()
+```
+Then open a linux terminal in the same location where the python project is located and execute:
+
+```bash
+python3 ./db_example.py
+```
+
+In the code we're trying to connect to a websocket port 8001 served by the ESP32 board under defaul URL: `ws://esp32basic:8001`. If connection is established we send a name of a waveform to be generated by ESP32 and then store each received fake sensor data in `exampledb.db` (created by Python program if not existing). 
