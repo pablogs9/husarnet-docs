@@ -82,6 +82,10 @@ If you still have problems, you can report the problem by sending mail to `suppo
 ```
 sudo journalctl --unit husarnet > log.txt
 ```
+or
+```
+sudo journalctl --unit=husarnet --since=yesterday > log.txt
+```
 
 The log will be saved as `log.txt` in the current directory.
 

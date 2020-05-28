@@ -1,6 +1,6 @@
 ---
-sidebar_label: ESP32
-title: Use Husarnet on ESP32
+sidebar_label: ESP32 (beta)
+title: Use Husarnet on ESP32 (beta)
 custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/begin-esp32
 keywords:
   - vpn
