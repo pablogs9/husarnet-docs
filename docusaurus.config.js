@@ -60,7 +60,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/husarnet/',
           label: 'GitHub',
           position: 'right',
         },
