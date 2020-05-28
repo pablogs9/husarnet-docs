@@ -96,11 +96,14 @@ If you want A to communicate with B, make sure to add A to B whitelist and B to 
 
 ## Command line
 
+Here you can find a list of commands you can execute in commandline using Husarnet Client.
+![Husarnet Client commands](/static/img/manual/husarnet-client.png)
+
 ### `whitelist add [addr]`
 
-Adds device to the of your Husarnet Client. 
+Adds device to the whitelist of your device running Husarnet Client. Read more about whitelisting mechanism [in this section](#managing-husarnet-client-manually). Alternatively to manualy add devices to your whitelist, you can do that by using [Husarnet Dashboard](#managing-husarnet-client-over-dashboard).
 
-Usage example:
+#### Usage example:
 ```bash
 sudo husarnet whitelist add fc94:...:527f
 ```
@@ -108,17 +111,123 @@ Will add device with a `fc94:...:527f` Husarnet IPv6 address to the whitelist.
 
 ### `whitelist rm [addr]`
 
+Removes device from the whitelist of your device running Husarnet Client. 
+
+#### Usage example:
+```bash
+sudo husarnet whitelist rm fc94:...:527f
+```
+Will remove device with a `fc94:...:527f` Husarnet IPv6 address from the whitelist.
+
 ### `whitelist enable`
+
+Enables whitelist mechanism - only devices with addresses stored in your device whitelist will be able to communicate with your devices.
+
+#### Usage example:
+```bash
+sudo husarnet whitelist enable
+```
 
 ### `whitelist disable`
 
+All devices, even owned by other users will be able to reach your device as long if they only know your device's IPv6 address.
+
+#### Usage example:
+```bash
+sudo husarnet whitelist disable
+```
+
 ### `status`
+
+Get a status of your device with Husarnet Client installed such as:
+- version of the Husarnet Client
+- your device's Husarnet IPv6 address
+- address of the Base Server your device is connected to
+- addresses of peers with a connection status and information whether peer-to-peer connection has been established, or Base Server is used for forwarding packets with one or more peers (in such a case visit [troubleshooting guide](/docs/tutorial-troubleshooting) that will describe common issues, and how you can overcome them).
+
+#### Usage example:
+```bash
+sudo husarnet status
+```
+
+#### Output example:
+```bash
+johny@johnylaptop:~$ sudo husarnet status
+Version: 2020.05.14.1
+Husarnet IP address: fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:aeeb
+UDP connection to base: [188.xxx.xxx.196]:5582
+Peer fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:c227
+  source=[87.xxx.xxx.16]:5582 
+  addresses from base=[87.xxx.xxx.16]:5582 [87.xxx.xxx.16]:5582 [192.xxx.xxx.150]:5582 [192.xxx.xxx.1]:5582 
+  target=[87.xxx.xxx.16]:5582
+  secure connection established
+Peer fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a
+  source=[137.xxx.xxx.110]:5582 
+  addresses from base=[137.xxx.xxx.110]:5582 [137.xxx.xxx.110]:5582 
+  target=[137.xxx.xxx.110]:5582
+  secure connection established
+Peer fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:ae4e
+  source=[137.xxx.xxx.16]:5582 
+  addresses from base=[137.xxx.xxx.16]:5582 [137.xxx.xxx.16]:5582 [192.xxx.xxx.153]:5582 [192.xxx.xxx.2]:5582 
+  tunnelled
+  establishing secure connection
+```
+Analyzing the output:
+- Peer `fc94:...:c227` this is a Husarnet IPv6 address of one of peers.
+  - `source=[87.xxx.xxx.16]:5582` - IP addresses that were used in the past to send something from this peer. 
+  - `addresses from base= ... [87.xxx.xxx.16]:5582 ...` - all known addresses of this peer obtained from a Base Server. They are used while trying to establish a peer-to-peer connection.
+  - `target=[87.xxx.xxx.16]:5582` - address of a peer that is actually used by the client during a peer-to-peer connection.
+  - `secure connection established` - connection with this peer is established. You can ping it.
+
+- Peer `fc94:...:932a` is a Websetup Server address that is a part of Husarnet Dashboard. It provides a list of peers to your device running Husarnet Client with their hostnames and is also used to connect devices to Husarnet networks.
+
+- Peer `fc94:...:ae4e` output is a little bit diffrent that in case of `fc94:...:c227`. Instead of `target= ... ` there is `tunnelled`. That means peer-to-peer connection was not possbile for some reason, and tunneling a traffic through Base Server was needed and probably you will need to change your network configuration - read more in a [troubleshooting guide](/docs/tutorial-troubleshooting).
 
 ### `genid`
 
+TODO
+
 ### `websetup`
 
+It is one of the methods to connect your device to your account at Husarnet Dashboard. After executing this command, the unique link is generated. If you open it in the web browser and you are logged into your app.husarnet.com account you will see something like this:
+
+![websetup page in dashboard](/static/img/manual/websetup.png)
+
+Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices without knowing it's Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will changed. In other words if you will open your Linux terminal you will see:
+
+```bash
+user@hostnameYouJustUsed:~$ _
+```
+
+#### Usage example:
+```bash
+sudo husarnet websetup
+```
+
+#### Output example:
+```bash
+Go to https://app.husarnet.com/husarnet/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to manage your network from web browser.
+```
+
 ### `join`
+
+This is second, next to `websetup` command way to connect your device to the Husarnet network that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. To find your **join code**, unique for each network you need to log into your account at https://app.husarnet.com, select a network, click **Add element** button and go to a **[join code]** tab.
+
+Keep your **join code** secret! If you consider your **join code** might be compromised, click **Reset join code** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+
+#### Usage example:
+```bash
+husarnet join fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a/xxxxxxxxxxxxxxxxxxxxxx mydevhostname
+```
+
+#### Output example:
+```bash
+johny@johnylaptop:~$ sudo husarnet join fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a/xxxxxxxxxxxxxxxxxxxxxx johnylaptop
+[sudo] password for johny: 
+[16699016] joining...
+[16701017] joining...
+johny@johnylaptop:~$
+```
 
 ## Tips
 
