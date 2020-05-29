@@ -6,6 +6,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
+// https://facebookincubator.github.io/infima/docs/layout/grid
+
 const features = [
   {
     title: <>Peer-to-peer</>,
@@ -45,8 +47,8 @@ function Feature({imageUrl, title, description}) {
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <h3 className="text--center">{title}</h3>
+      <p  className="text--center">{description}</p>
     </div>
   );
 }
@@ -58,16 +60,24 @@ function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <header className={classnames('hero hero--dark', styles.heroBanner)}>
-        <div className="container">
+      <header className="hero hero--dark">
+
+      {/* <header className={classnames('hero hero--dark', styles.heroBanner)}> */}
+
+        <div className="container ">
+          
+          {/* <div className={classnames("row", styles.heroBanner)}> */}
           <div className="row">
-            <div className="col">
-              <h1 className="hero__title">{siteConfig.title}</h1>
+            <div className={classnames("col col--4", styles.heroBanner)}>
+            {/* <div className="col col--4"> */}
+              {/* CSS BEM */}
+              <h1 className="hero__title">{siteConfig.title}</h1> 
               <p className="hero__subtitle">{siteConfig.tagline}</p>
+              
               <div className={styles.buttons}>
                 <Link
                   className={classnames(
-                   'button button--primary button--lg',
+                   'button button--primary button--outline button--lg',
                    styles.getStarted,
                  )}
                   to={useBaseUrl('docs/begin-linux')}>
@@ -75,7 +85,7 @@ function Home() {
                 </Link>
               </div>
             </div>
-            <div className="col">
+            <div className="col col--8">
               <img className={styles.heroImg} src="img/connect_devices.png" />
             </div>
           </div>

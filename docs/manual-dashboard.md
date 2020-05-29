@@ -44,6 +44,8 @@ This manual describes how to use **Husarnet Dashboard** web app which public ver
 Access to Husarnet Dashboard API is possible only in **Public/Enterprise** plan and all **Self hosted** plans.
 :::
 
+Thanks to **Husarnet Dashboard API** you can manage your network, add devices etc. without doing that manually from a level of http://app.husarnet.com. Thanks to that approach you can automate those processes by your own scripts that might be useful if you want for example to embed Husarnet functionality into products your are going to provide to a third party.
+
 ### Authorization
 
 Go to https://app.husarnet.com/api-token to retrieve your token.
