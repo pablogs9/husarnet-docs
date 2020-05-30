@@ -143,9 +143,54 @@ https://app.husarnet.com will not manage the whitelist on this device, for examp
 
 ## Sharing networks to other users
 
+To share a network you need at first open that network and click **[Share]** button in the top panel. You will see a new pop-up where you can place account names (e-mail addresses used during registration on **Husarnet Dashboard**) of users to who you want to share your network.
+
+Below there is a list of users that already have access to your network. You can remove access to given users by clicking **[X]** button that is next to each e-mail.
+
+![sharing window](/static/img/manual/share1.png)
+
+When you share a network to a specific user, this user will see your invitation as pending:
+
+![accept shared network](/static/img/manual/share2.png)
+
+After clicking **[Accept]** button this networks will be listed next to other network of that user. If that user no longer want to have access to a network somebody shared, the user need to open shared network, and click a **[Unshare]** button.
 
 ## Check status of your networks and devices
 
+
+## Accessing web UI hosted by devices
+
+Husarnet Dashboard provides a service that makes it possible to access HTTP server running on a Husarnet device using standard web browser over the internet (i.e. without Husarnet installed).
+
+If there is a HTTP server listening on port 8000 on the Husarnet interface, "Web UI" button will appear in the network screen.
+
+![accept shared network](/static/img/manual/webui1.png)
+<!-- <div class="image"><img src="/img/web-ui/net.png"/></div> -->
+
+Clicking the button will navigate you to a page with URL like `https://XXXX.husarnetusers.com`. On that address there is a server that securely proxies the requests to your device. The page is available only to you (and requires you to login to your account).
+
+:::danger Warning
+Login page will always have URL starting with `https://app.husarnet.com/`. 
+
+`husarnetusers.com` URLs are controlled by users and you should not trust them implicitly.
+:::
+
+### Public Web UI
+
+By default, the interface is accessiable only to you. However, you can make the web UI public, so anyone who knows the address, will be able to access the interface.
+
+To make the interface public, open element settings (by clicking its name in the network screen) and toggle "Make the Web UI public" checkbox. Then you can copy the address of the page accessible using "Open Web UI" button and send it to someone.
+
+:::danger Warning
+Everyone will be able to access the Web UI! Make sure it is written in a secure way. Most elements from the Husarnet Marketplace assume that they won't be made public.
+:::
+
+<!-- <div class="image"><img src="/img/web-ui/public.png"/></div> -->
+![accept shared network](/static/img/manual/webui2.png)
+
+### Details
+
+The Web UI URL has form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com` where `fcXXXXXXXXXXXXXX` is the Husarnet device IP (without colons) and `PORT` is the TCP port of the service running on a device. For security, only ports 8000 and 8001 are allowed. URLs in form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com/__port_PORT2/` (e.g. `https://fcXXXXXXXXXXXXXX-8000.husarnetusers.com/__port_8001/`) are special - PORT2 overwrites PORT. This form is useful for accessing websocket servers.
 
 ## Account security
 
