@@ -20,10 +20,125 @@ This manual describes how to use **Husarnet Dashboard** web app which public ver
 
 ![Husarnet Dashboard main page](/static/img/manual/dashboard-main.png)
 
-## Creating and removing networks
+## Create a network
+
+To create a new Husarnet network, just log into **Husarnet Dashboard** main panel, click **[Create network]** button, and in the pop-up choose a name and click **[Create]** button. Newly created, empty network panel will open that looks like this:
+
+![new network window](/static/img/manual/firstnetwork.png)
+
+You can change network view setting by clicking a red knob on the right and you will see the following pop-up:
+
+![new network window](/static/img/manual/netsettings.png)
+
+You can choose which information you would like to display in the specific network panel:
+- **Status** of each device (online/offline)
+- **Address** is Husarnet IPv6 address of each device
+- **Owner** of the specific device in the network. Because you can share your network to other users, thanks to that column you will see which user is the owner of that device.
+- **Info** some extra information about the specific device like `ROS master` or accessing a `Web UI` if you configure it.
+
+You can also change a default icon that allows you to easily distinguish your specific network from others. **Remember to use only 200x200px PNG images here!!!**.
 
 
-## Adding and removing devices
+## Add devices to existing network
+
+
+After you click **[Add element]** button you will see a pop-up looking like this:
+
+![new network window](/static/img/manual/addelement.png)
+
+Now you can add new devices in a few ways:
+
+------
+### [terminal tab]
+
+This method uses `husarnet websetup` command that you need to execute from the level of command line from devices with **Husarnet Client** installed that you want to connect. After executing this command, the unique link is generated. If you open it in the web browser and you are logged into your **Husarnet Dashboard** account you will see something like this:
+
+![websetup page in dashboard](/static/img/manual/websetup.png)
+
+Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices without knowing it's Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will changed. In other words if you will open your Linux terminal you will see:
+
+```bash
+user@hostnameYouJustUsed:~$ _
+```
+
+For more information visit [Husarnet Client manual](/docs/manual-client#websetup).
+
+------
+### [scan QR tab]
+
+:::info AVAILABLE ONLY IN BETA VERSION
+Adding devices with QR codes is supported currently only by experimental apps that are not publically released yet.
+:::
+
+This method is dedicated mainly for connecting mobile phones to the Husarnet network. **Husarnet Client** Android app is not released yet, but after release it will be connected to **Husarnet Dashboard** that way.
+
+![scan QR tab](/static/img/manual/scanqr.png)
+
+**Beta version of Husarnet Client for Android** looks like this:
+<center><img src={"/static/img/manual/scanqr_android.jpg"} width="300"/></center>
+
+After clicking **Scan QR code** button in **Husarnet Client for Android** app you will be asked for a permision to your camera by Android OS and when you agree, you will be able to scan a QR code displayed in the **scan QR tab** in **Husarnet Dashboard**. That's a very handy way to connect devices equipped in camera to your Husarnet networks.
+
+------
+### [cloud tab]
+
+:::info AVAILABLE ONLY IN BETA VERSION
+Husarnet Marketplace is currently a closed beta functionality. If you are interested in testing it, please contact us via an email contact@husarnet.com and describe your use-case. 
+:::
+This tab allows you to add preconfigured, hosted on public cloud microservices to your existing Husarnet networks. 
+
+![cloud elements](/static/img/manual/cloud.png)
+
+These microservices are seen from a level of other devices in the network as a separate device. Currently available microservices in our Beta program are:
+- **web terminal** you can SSH your Husarnet devices from a level of https://app.husarnet.com from any devices if you only know credentials to your account (even outside Husarnet network)
+- **ROS SLAM implementations** this microservice could by used by your ROS robots for outsourcing computation heavy task of simultanously localization and map creation.
+
+Cloud microservices will no be available for Self-hosted plans.
+
+------
+### [join code tab]
+
+
+This is a second, next to `websetup` way to connect your device to the Husarnet network using a Linux command line that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. 
+
+![join code tab](/static/img/manual/dashboard_joincode.png)
+
+Keep your **join code** secret! If you consider your **join code** might be compromised, click **Reset join code** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+
+#### Usage example:
+```bash
+husarnet join fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a/xxxxxxxxxxxxxxxxxxxxxx mydevhostname
+```
+
+#### Output example:
+```bash
+johny@johnylaptop:~$ sudo husarnet join fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a/xxxxxxxxxxxxxxxxxxxxxx johnylaptop
+[sudo] password for johny: 
+[16699016] joining...
+[16701017] joining...
+johny@johnylaptop:~$
+```
+
+------
+### [already added tab]
+
+If you already connected your device to your **Husarnet Dashboard** you can add it to other networks. One device could be in one or multiple networks at once.
+
+![already added tab](/static/img/manual/alreadyadded.png)
+
+All your devices already connected to your account are available under the dropdown menu. Just select device you would like to add to the given network and click **[Add]** button
+
+------
+### [address tab]
+
+As described [in the Husarnet Client manual](/docs/manual-client#managing-husarnet-client-manually) you can manually add other devices to the whitelist if only you know their Husarnet IPv6 address. Instead using command line, you can add new devices to the whitelist by using this tab.
+
+:::info
+https://app.husarnet.com will not manage the whitelist on this device, for example you will not see whether it is online or offline.
+:::
+
+
+![address tab](/static/img/manual/dashboardaddress.png)
 
 
 ## Sharing networks to other users
