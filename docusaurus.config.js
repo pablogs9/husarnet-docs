@@ -39,7 +39,12 @@ module.exports = {
         src: 'img/husarnet_signet.svg',
         href: '/',
       },
-      links: [      
+      links: [
+        {
+          href: 'https://husarnet.com',
+          label: 'Exit Docs',
+          position: 'left',
+        },      
         {
           to: 'docs/begin-linux',
           activeBasePath: 'docs',
