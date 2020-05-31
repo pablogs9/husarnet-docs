@@ -155,7 +155,7 @@ When you share a network to a specific user, this user will see your invitation 
 
 After clicking **[Accept]** button this networks will be listed next to other network of that user. If that user no longer want to have access to a network somebody shared, the user need to open shared network, and click a **[Unshare]** button.
 
-## Check status of your networks and devices
+<!-- ## Check status of your networks and devices -->
 
 
 ## Accessing web UI hosted by devices
@@ -192,10 +192,10 @@ Everyone will be able to access the Web UI! Make sure it is written in a secure 
 
 The Web UI URL has form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com` where `fcXXXXXXXXXXXXXX` is the Husarnet device IP (without colons) and `PORT` is the TCP port of the service running on a device. For security, only ports 8000 and 8001 are allowed. URLs in form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com/__port_PORT2/` (e.g. `https://fcXXXXXXXXXXXXXX-8000.husarnetusers.com/__port_8001/`) are special - PORT2 overwrites PORT. This form is useful for accessing websocket servers.
 
-## Account security
+<!-- ## Account security
 
 
-## Managing subscriptions and billing
+## Managing subscriptions and billing -->
 
 
 ## Husarnet Dashboard API

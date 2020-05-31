@@ -54,4 +54,13 @@ To ssh to other devices within Husarnet network you can use their hostnames as w
 ssh username@mylaptop
 ```
 
-<TODO: jak np. napisać prosty kod w pythonie aby połączyć 2 urządzenia>
+------
+That's all. Installing and using **Husarnet Client** is very simple. It just works in background on the level of your operating system and your Husarnet connected devices see each other like they were in the same LAN network.
+
+Just be aware that the servers and client you are using must support IPv6 (as Husarnet is an IPv6 overlay network) - for example, you have to listen on "::", not "0.0.0.0".
+
+More resources:
+- [Husarnet Client manual page](/docs/manual-client) to read more about Husarnet Client app you just installed.
+- [Husarnet Dashboard manual page](/docs/manual-dashboard) to read more how you can manage your networks in an easy way,
+- [Husarnet Hackster profile](https://hackster.io/husarnet/projects) containing a simple projects that might inspire you how you can use Husarnet or just for fun.
+

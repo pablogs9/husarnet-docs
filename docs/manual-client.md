@@ -1,6 +1,6 @@
 ---
-sidebar_label: Husarnet Client app
-title: Husarnet Client app manual
+sidebar_label: Husarnet Client app (Linux)
+title: Husarnet Client app manual for Linux
 custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/manual-client
 keywords:
   - vpn
@@ -233,7 +233,7 @@ johny@johnylaptop:~$
 
 1. You may contact all other devices in the network by using their hostnames, e.g.:
 
-    ```
+    ```bash
     $ ping6 mydevice1
     $ ssh user@mydevice1
     $ wget http://mydevice:8000

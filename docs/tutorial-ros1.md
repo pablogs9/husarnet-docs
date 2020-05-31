@@ -12,7 +12,7 @@ image: https://i.imgur.com/mErPwqL.png
 
 Add these lines to .bashrc (or .zshrc if you use zsh) of the user who will use ROS:
 
-```
+```bash
 source /opt/ros/kinetic/setup.bash
 
 export ROS_IPV6=on
@@ -50,13 +50,13 @@ Husarnet provides secure network layer for ROS - but you also need to ensure tha
 
 First, install `husarnet-ros` package, if you don't already have it:
 
-```
+```bash
 apt-get install husarnet-ros
 ```
 
 And enable the firewall:
 
-```
+```bash
 husarnet-firewall enable
 ```
 
