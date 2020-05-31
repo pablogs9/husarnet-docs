@@ -14,15 +14,17 @@ Husarnet VPN Client can run not only on servers, laptops or mobile phones (soon)
 
 This quick start guide describes how to use **Husarnet VPN Client** software library on ESP32 Wi-Fi microcontrollers and how to configure a network using **Husarnet Dashboard** in a few easy steps.
 
+Sections IV and V contain two demo project: basic and advanced. After finishing this quick start guide you will know how not only how to connect your ESP32 and Linux computer, but also how to do some useful staff on that!
+
 ## I. Create a network
 
-Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button.
+Log in to [Husarnet Dashboard](https://app.husarnet.com), click **[Create network]** button, name your network and click **[Create]** button.
 
 ![create network](/img/getting-started/docs-create-network.png)
 
 ## II. Get a join code
 
-Click **Add element** button, select **join code** tab and copy your join code that looks like this: 
+Click **[Add element]** button, select **[join code]** tab and copy your join code that looks like this: 
 ```
 fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 ```
@@ -31,7 +33,7 @@ fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 
 ## III. Configure Arduino IDE environment
 
-### 1. Install IDE
+### 1. Install Arduino IDE
 First, download and install [Arduino IDE](https://www.arduino.cc/en/Main/Software).
 
 ### 2. Add ESP32 boards (powered by Husarnet) 
@@ -57,16 +59,23 @@ https://files.husarion.com/arduino/package_esp32_index.json
 
 ## IV. Demo no. 1 (basic)
 
-We created a "hello world" demo for ESP32 and Husarnet. To run it you will need:
+We created a simple "hello world" demo for ESP32 and Husarnet. To run it you will need:
 - ESP32 dev board
 - laptop running Linux
 
-ESP32 board is sending `Hello world! 1`, `Hello world! 2`, `Hello world! 3` etc. over the internet using Husarnet VPN to a computer with a very basic server written in Python3 and running on 8002 port.
+It looks like that: ESP32 board is sending 
 
-Both client and server code is available on the [GitHub](https://github.com/DominikN/husarnet-esp32-minimal)
+```bash
+Hello world! 1
+Hello world! 2
+Hello world! 3 
+```
+over the internet using Husarnet VPN to a computer with a very basic server running on 8002 port and written in Python3.
+
+Both client and server code is available on [GitHub](https://github.com/DominikN/husarnet-esp32-minimal)
 
 ### ESP32 client code
-Create a new Arduino project **husarnet-esp32-minimal** and paste that code to the **husarnet-esp32-minimal.ino** file (remember to replace `wifi-ssid-1` and `wifi-pass-for-ssid-1` by your Wi-Fi credentials and also replace a joincode by your own obtained in [section II](/docs/begin-esp32#ii-get-a-join-code)):
+Create and open a new folder called **husarnet-esp32-minimal** and paste the code presented bellow to the **husarnet-esp32-minimal.ino** file (remember to replace `wifi-ssid-1` and `wifi-pass-for-ssid-1` by your Wi-Fi credentials and also replace a joincode by your own obtained in [section II](/docs/begin-esp32#ii-get-a-join-code)):
 
 ```cpp
 #include <WiFi.h>
@@ -132,7 +141,7 @@ And upload the code to your ESP32.
 
 ### Python server code
 
-First, connect your Linux laptop to the same Husarnet network as ESP32. Follow [this guide](/docs/begin-linux) to see how to install **Husarnet Client** app and connect your laptop to the Husarnet network.
+First, connect your Linux laptop to the same Husarnet network as ESP32. Follow [getting started guide for Linux](/docs/begin-linux) to see how to install **Husarnet Client** app and connect your laptop to the Husarnet network.
 
 Create a **laptopServer.py** file and paste this code:
 
@@ -171,18 +180,19 @@ If you want to connect your existing code over the internet remember to change a
 Demo no. 1 was really basic. Now let's create something that could be a good starting point for a real IoT project working on ESP32 board and Husarnet!
 
 Here is a list of improvements:
-- use **websockets** that are very handy to use in JavaScript and Python
+- use **websockets** that are very handy to handle communication in JavaScript and Python code
 - use **JSON** for data serialization and to provide elegant API
-- add **JSON API** for changing parameters of ESP32
 - host simple **web server** on the ESP32
 - create a Python3 script that will save data in the **SQLite database**
 - make ESP32 to act as **a server**, not as a client
 
-Typical IoT devices act only as clients connecting to a central server with a static IP address. Husarnet allows you to have a completely new approach for creating your own internet connected devices. They can act both as a server and as a client even with no static and public IP needed.
+Typical IoT devices act only as clients connected to a central server with a static IP address:
 
 ![Old IoT](/img/getting-started/iot_old.png)
 
-Thanks to that approach your sensor can be running the whole time with no additional server needed and you can connect from a level of your laptop to it directly over the internet whenever you want.
+Husarnet allows you to have a completely new approach for creating your own internet connected devices. They can act both as a server and as a client even with no static and public IP needed.
+
+Thanks to that approach your sensors can be running the whole time with no additional server needed and you can connect from a level of your laptop to them directly over the internet whenever you want. That gives you much lower latency (comparing to central server based approach, especially if your devices are in near networks) and make your IoT network configuration much simpler.
 
 ![Old IoT](/img/getting-started/iot_new.png)
 
@@ -192,11 +202,11 @@ At first, clone [husarnet-esp32-default project from GitHub](https://github.com/
 
 - **husarnet-esp32-default.ino** with a main code
 - **html.h and default_js.h** header files containging a c-string tables with HTML and JS code of a server hosted by ESP32
-- **lut.cpp and lut.h** - library to generate a fake data. Replace this with the real sensor data after finishing this first start guide.
+- **lut.cpp and lut.h** - library to generate a fake data. Replace this with the real sensor data after finishing this quick start guide.
 
 There is also a **python** folder containing a code that will be executed on your laptop side.
 
-#### Install ArduinoJson and arduinoWebSockets libarty in Arduino IDE
+#### 1. Install ArduinoJson and arduinoWebSockets libarty in Arduino IDE
 **Install ArduinoJson library:**
 
 - open `Tools -> Manage Libraries...`
@@ -211,7 +221,7 @@ There is also a **python** folder containing a code that will be executed on you
 - choose `arduinoWebSockets-master.zip` file that you just downloaded and click open button
 
 
-#### Add your own Wi-Fi and Husarnet credentials
+#### 2. Add your own Wi-Fi and Husarnet credentials
 in **husarnet-esp32-default.ino** file replace `wifi-ssid-1` and `wifi-pass-for-ssid-1` by your Wi-Fi credentials and also replace a joincode by your own, obtained in [section II](/docs/begin-esp32#ii-get-a-join-code)):
 
 ```cpp
@@ -461,13 +471,20 @@ void loop()
 ```
 
 ### Web page hosted by ESP32
+
+After you upload a code to your ESP32 board, you should be able to access a web page hosted by ESP32 from a level of a web browser (on a laptop in the same Husarnet network).
+
+You can just use a hostname in the URL: `http://esp32basic:8000`, where `esp32basic` is a Husarnet hostname of your ESP32 board, and `8000` is a port on which HTTP server is available.
+
+Another option is to use Husarnet IPv6 address of your ESP32 board in the URL (you can find it in **Husarnet Dashboard**): `http://[fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx]:8000/`.
+
 ![web UI ESP32](/img/getting-started/esp32-webpage.png)
 
 ### Python server code
 
-First, connect your Linux laptop to the same Husarnet network as ESP32. Follow [this guide](/docs/begin-linux) to see how to install **Husarnet Client** app and connect your laptop to the Husarnet network.
+First, connect your Linux laptop to the same Husarnet network as ESP32. Follow [getting started guide for Linux](/docs/begin-linux) to see how to install **Husarnet Client** app and connect your laptop to the Husarnet network.
 
-In the [husarnet-esp32-default repository](https://github.com/DominikN/husarnet-esp32-default) there is a folder **Python** folder containing **db_example.py** file
+In the [husarnet-esp32-default repository](https://github.com/DominikN/husarnet-esp32-default) there is a **Python** folder containing **db_example.py** file
 
 ```python
 import sqlite3
@@ -531,4 +548,24 @@ Then open a linux terminal in the same location where the python project is loca
 python3 ./db_example.py
 ```
 
-In the code we're trying to connect to a websocket port 8001 served by the ESP32 board under defaul URL: `ws://esp32basic:8001`. If connection is established we send a name of a waveform to be generated by ESP32 and then store each received fake sensor data in `exampledb.db` (created by Python program if not existing). 
+In the code we're trying to connect to a websocket port 8001 served by the ESP32 board under defaul URL: `ws://esp32basic:8001`. If connection is established, we send a name of a waveform to be generated by ESP32 and then store each received fake sensor data in `exampledb.db` (created by Python program if not existing). 
+
+
+------
+That's all. Installing and using **Husarnet VPN Client** library for ESP32 is very simple. Basically it works just like standard [Arduino core for ESP32 repository](https://github.com/espressif/arduino-esp32), but instead of `<WiFiClient.h>` and `<WiFiServer.h>` libraries (that are still available) you need to use`<HusarnetClient.h>` and `<HusarnetServer.h>` libraries provied by Husarnet.
+
+:::tip
+There is a simple way to quickly port probably most of libraries available for ESP32 board that use `<WiFiClient.h>` and `<WiFiServer.h>` standard libraries.
+
+Just open library files (both `.cpp` and `.h`) and replace each occurence of:
+- `WiFiClient` string by `HusarnetClient` string
+- `WiFiServer` string by `HusarnetServer` string
+:::
+
+Your Husarnet connected devices see each other like they were in the same LAN network even if one of them is a microcontroller and other is Linux computer.
+
+Just be aware that the servers and client you are using must support IPv6 (as Husarnet is an IPv6 overlay network) - for example, you have to listen on "::", not "0.0.0.0".
+
+#### More resources:
+- [Husarnet Dashboard manual page](/docs/manual-dashboard) to read more how you can manage your networks in an easy way,
+- [Husarnet Hackster profile](https://hackster.io/husarnet/projects) containing a simple projects that might inspire you how you can use Husarnet or just for fun.

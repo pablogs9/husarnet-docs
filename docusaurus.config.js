@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Husarnet',
-  tagline: 'Low latency, lightweight, privacy preserving VPN.',
+  tagline: 'Low latency, lightweight, privacy preserving P2P VPN.',
   url: 'https://docs.husarnet.com',
   baseUrl: '/',
   favicon: 'img/favicon-96x96.png',
@@ -37,7 +37,7 @@ module.exports = {
       logo: {
         alt: 'Husarnet',
         src: 'img/husarnet_signet.svg',
-        href: 'https://docs.husarnet.com',
+        href: '/',
       },
       links: [      
         {
@@ -46,7 +46,7 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },  
-        {to: 'blog', label: 'Blog', position: 'left'},
+        /*{to: 'blog', label: 'Blog', position: 'left'},
         {
           to: 'docs/test/doc1',
           activeBasePath: 'docs/test',
@@ -58,7 +58,7 @@ module.exports = {
           activeBasePath: 'docs/old',
           label: 'Old',
           position: 'left',
-        },
+        },*/
         {
           href: 'https://github.com/husarnet/',
           label: 'GitHub',

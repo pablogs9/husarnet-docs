@@ -8,17 +8,17 @@ keywords:
 image: https://i.imgur.com/mErPwqL.png
 ---
 
-This quick start guide describes how to install **Husarnet VPN Client** software on your computers and how to configure a network using **Husarnet Dashboard** in a few easy steps.
+This quick start guide describes how to install **Husarnet VPN Client** software on your computers running Linux and how to configure a network using **Husarnet Dashboard** in a few easy steps.
 
 ## I. Create a network
 
-Log in to [Husarnet Dashboard](https://app.husarnet.com), click **Create network**, name it and click **Create** button.
+Log in to [Husarnet Dashboard](https://app.husarnet.com), click **[Create network]** button, name your network and click **[Create]** button.
 
 ![create network](/img/getting-started/docs-create-network.png)
 
 ## II. Get a join code
 
-Click **Add element** button, select **join code** tab and copy your join code that looks like this: 
+Click **[Add element]** button, select **[join code]** tab and copy your join code that looks like this: 
 ```
 fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 ```
@@ -41,21 +41,21 @@ Type in the Linux terminal:
 ```
 sudo husarnet join fc94:...:932a/XXXXXXXXXXXXXXXXXXXXX mylaptop
 ```
-where `fc94:...:932a/XX...X` is a join code from point II and `mylaptop` is an easy to remember hostname you want to associate with your device. After a while you should see your device with “online” status at app.husarnet.com
+where `fc94:...:932a/XX...X` is a join code from point II and `mylaptop` is an easy to remember hostname you want to associate with your device. After a while you should see your device with “online” status at **Husarnet Dashboard**
 
 ## V. Test your network
 
 Do points III and IV on other devices you want to connect. If you would like to ping one device from another just type:
-```
+```bash
 ping6 mylaptop
 ```
 To ssh to other devices within Husarnet network you can use their hostnames as well:
-```
+```bash
 ssh username@mylaptop
 ```
 
 ------
-That's all. Installing and using **Husarnet Client** is very simple. It just works in background on the level of your operating system and your Husarnet connected devices see each other like they were in the same LAN network.
+That's all. Installing and using **Husarnet Client** is very simple. It just works in background on the level of your operating system. Your Husarnet connected devices see each other like they were in the same LAN network.
 
 Just be aware that the servers and client you are using must support IPv6 (as Husarnet is an IPv6 overlay network) - for example, you have to listen on "::", not "0.0.0.0".
 
