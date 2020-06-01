@@ -19,6 +19,11 @@ The simplest way to install Husarnet is to paste the following line to your term
 curl https://install.husarnet.com/install.sh | sudo bash
 ```
 
+After installation process is finished, execute the following command:
+```
+sudo systemctl restart husarnet
+```
+
 That's all.
 
 This method works on APT and Yum based Linux distributions such as Debian, Ubuntu, CentOS, RHEL, Fedora or Mint.
@@ -58,23 +63,23 @@ sudo tar --directory=/ --no-same-owner --dereference -xf husarnet-latest-amd64.t
 
 (replace `-amd64` with `-armhf` or `-i386` if you don't have 64-bit Intel/AMD processor)
 
-If you are using systemd, enable and start the service (`systemctl enable husarnet; systemctl start husarnet`). Otherwise, make sure `husarnet daemon` command is started on system startup. You need to run it as root, but don't worry - Husarnet automatically relinquishes unnecessary permissions.
+If you are using systemd, enable and start the service (`systemctl enable husarnet; systemctl start husarnet`). Otherwise, make sure `husarnet daemon` command is started on system startup. You need to run it as root, but don't worry - **Husarnet automatically relinquishes unnecessary permissions.**
 
-## Managing Husarnet Client over Dashboard
+## Managing Husarnet Client over Husarnet Dashboard
 
 **Husarnet Dashboard** is a web application allowing you to:
 - Create and remove new Husarnet networks (your device can be in one or multiple Husarnet networks in the same time).
 - Share your Husarnet networks to other users with configurable access rights.
 - Add devices to your networks in a few ways (websetup, join code, QR code, already linked to your account)
 - Removing devices from network or from your account
-- Check your devices information (IPv6 address, online/offline, owner etc.)
+- Checking your devices information (IPv6 address, online/offline, owner etc.)
 - in commercial plans accessing your billing data and managing subscriptions.
 
 ![Husarnet Dashboard main page](/static/img/manual/dashboard-main.png)
 
-If you add devices to the specific Husarnet network all devices from this network see you device like it was in the same LAN network and they are whitelisting automatically. To learn more about **Husarnet Dashboard** app visit [it's documentation page](/docs/manual-dashboard).
+If you add devices to the specific Husarnet network all devices from this network see your device like it was in the same LAN network and they are whitelisting automatically. To learn more about **Husarnet Dashboard** app visit [its documentation page](/docs/manual-dashboard).
 
-You can add your device to a network shared to you by other https//app.husarnet.com user. And your device can be in the same time connected to your other, private Husarnet networks that will be accessible only by you. Such a scenario is good if you would like to give someone an access to the specific device that is connected to your **Husarnet Dashboard** account. Just place this device in the separate, newly created Husarnet network and share this network to one or multiple users. Another use case would be creating an ad-hoc network for working group or for LAN gaming.
+You can add your device to a Husarnet network shared to you by other **Husarnet Dashboard** user. And your device can be in the same time connected to your other, private Husarnet networks that will be accessible only by you. Such a scenario is good if you would like to give someone an access to the specific device that is connected to your **Husarnet Dashboard** account. Just place this device in the separate, newly created Husarnet network and share this network to one or multiple users. Another use case would be creating an ad-hoc network for working group, for LAN gaming etc..
 
 Public version of **Husarnet Dashboard** is available under this link: https://app.husarnet.com. There are also self-hosted commercial versions. For more details visit pricing page.
 
@@ -85,7 +90,7 @@ Public version of **Husarnet Dashboard** is available under this link: https://a
 
 Sometimes managing the devices via Husarnet Dashboard can be cumbersome. You can skip connecting your device to the Dashboard and manage whitelist and hostnames via command line.
 
-If not the whitelist, you could reach any device connected to Husarnet without any configuration if you only know it's IPv6 Husarnet address. If that suits you, simply disable it on all devices - `husarnet whitelist disable`. Be aware of security implications of this action (e.g. do this only if you are confident that your firewall is strong enough).
+If not the whitelist, you could reach any device connected to Husarnet without any configuration if you only know its Husarnet IPv6 address. If that suits you, simply disable it on all devices - `husarnet whitelist disable`. Be aware of security implications of this action (e.g. do this only if you are confident that your firewall is strong enough).
 
 Otherwise, whitelist has to contain IP addresses of the devices that are authorized to connect to your host. You can manage it using two commands:
 
@@ -96,7 +101,7 @@ If you want A to communicate with B, make sure to add A to B whitelist and B to 
 
 ## Command line
 
-Here you can find a list of commands you can execute in commandline using Husarnet Client.
+Here you can find a list of commands you can execute in Husarnet Client:
 ![Husarnet Client commands](/static/img/manual/husarnet-client.png)
 
 ### `whitelist add [addr]`
@@ -107,17 +112,17 @@ Adds device to the whitelist of your device running Husarnet Client. Read more a
 ```bash
 sudo husarnet whitelist add fc94:...:527f
 ```
-Will add device with a `fc94:...:527f` Husarnet IPv6 address to the whitelist.
+Adds a device with a `fc94:...:527f` Husarnet IPv6 address to the whitelist.
 
 ### `whitelist rm [addr]`
 
-Removes device from the whitelist of your device running Husarnet Client. 
+Removes a device from the whitelist of your device running Husarnet Client. 
 
 #### Usage example:
 ```bash
 sudo husarnet whitelist rm fc94:...:527f
 ```
-Will remove device with a `fc94:...:527f` Husarnet IPv6 address from the whitelist.
+Will remove a device with a `fc94:...:527f` Husarnet IPv6 address from the whitelist.
 
 ### `whitelist enable`
 
@@ -173,27 +178,27 @@ Peer fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:ae4e
   establishing secure connection
 ```
 Analyzing the output:
-- Peer `fc94:...:c227` this is a Husarnet IPv6 address of one of peers.
+- Peer `fc94:...:c227` - this is a Husarnet IPv6 address of one of peers.
   - `source=[87.xxx.xxx.16]:5582` - IP addresses that were used in the past to send something from this peer. 
-  - `addresses from base= ... [87.xxx.xxx.16]:5582 ...` - all known addresses of this peer obtained from a Base Server. They are used while trying to establish a peer-to-peer connection.
-  - `target=[87.xxx.xxx.16]:5582` - address of a peer that is actually used by the client during a peer-to-peer connection.
+  - `addresses from base= ... [87.xxx.xxx.16]:5582 ...` - all known addresses of this peer obtained from a **Base Server**. They are used while trying to establish a peer-to-peer connection.
+  - `target=[87.xxx.xxx.16]:5582` - address of a peer that is actually used by the **Husarnet Client** during a peer-to-peer connection.
   - `secure connection established` - connection with this peer is established. You can ping it.
 
-- Peer `fc94:...:932a` is a Websetup Server address that is a part of Husarnet Dashboard. It provides a list of peers to your device running Husarnet Client with their hostnames and is also used to connect devices to Husarnet networks.
+- Peer `fc94:...:932a` is a Websetup Server address that is a part of **Husarnet Dashboard**. It provides a list of peers to your device running **Husarnet Client** with their hostnames and is also used to connect devices to Husarnet networks.
 
-- Peer `fc94:...:ae4e` output is a little bit diffrent that in case of `fc94:...:c227`. Instead of `target= ... ` there is `tunnelled`. That means peer-to-peer connection was not possbile for some reason, and tunneling a traffic through Base Server was needed and probably you will need to change your network configuration - read more in a [troubleshooting guide](/docs/tutorial-troubleshooting).
+- Peer `fc94:...:ae4e` output is a little bit diffrent that in case of `fc94:...:c227`. Instead of `target= ... ` there is `tunnelled`. That means peer-to-peer connection was not possbile for some reason, and tunneling a traffic through a **Husarnet Base Server** was needed. This is not expected behavior - probably you will need to change your network configuration. Read more in a [troubleshooting guide](/docs/tutorial-troubleshooting).
 
-### `genid`
+<!-- ### `genid`
 
-TODO
+TODO -->
 
 ### `websetup`
 
-It is one of the methods to connect your device to your account at Husarnet Dashboard. After executing this command, the unique link is generated. If you open it in the web browser and you are logged into your app.husarnet.com account you will see something like this:
+It is one of the methods to connect your device to an account at **Husarnet Dashboard**. After executing this command, the unique link is generated. If you open it in the web browser and you are logged into your **Husarnet Dashboard** account you will see something like this:
 
 ![websetup page in dashboard](/static/img/manual/websetup.png)
 
-Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices without knowing it's Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will changed. In other words if you will open your Linux terminal you will see:
+Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices. This is more handy than using Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will be changed. In other words if you will open your Linux terminal you will see:
 
 ```bash
 user@hostnameYouJustUsed:~$ _
@@ -211,9 +216,11 @@ Go to https://app.husarnet.com/husarnet/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### `join`
 
-This is second, next to `websetup` command way to connect your device to the Husarnet network that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. To find your **join code**, unique for each network you need to log into your account at https://app.husarnet.com, select a network, click **Add element** button and go to a **[join code]** tab.
+This is second, next to `websetup`, command way to connect your device to a Husarnet network that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. To find your **join code**, unique for each network, you need to log into your account at https://app.husarnet.com, select a network, click **Add element** button and go to a **[join code]** tab.
 
-Keep your **join code** secret! If you consider your **join code** might be compromised, click **Reset join code** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+:::warning
+Keep your **join code** secret! If you consider your **join code** might be compromised, click **[Reset join code]** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+:::
 
 #### Usage example:
 ```bash

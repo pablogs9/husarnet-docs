@@ -90,9 +90,13 @@ module.exports = {
               to: 'https://app.husarnet.com/tos',
             },
             {
+              label: 'License Agreement',
+              to: 'https://app.husarnet.com/tos',
+            },
+            /*{
               label: 'Blog',
               to: '/blog',
-            },
+            },*/
             
           ],
         },

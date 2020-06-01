@@ -11,10 +11,10 @@ image: https://i.imgur.com/mErPwqL.png
 This manual describes how to use **Husarnet Dashboard** web app which public version is available under this link: [https://app.husarnet.com ](https://app.husarnet.com). 
 
 **Husarnet Dashboard** allows you to:
-- Create and remove new Husarnet networks (your device can be in one or multiple Husarnet networks in the same time).
+- Create and remove Husarnet networks (your device can be in one or multiple Husarnet networks in the same time).
 - Removing devices or adding them to your networks in a few ways (websetup, join code, QR code, already linked to your account)
 - Share your Husarnet networks to other users with configurable access rights.
-- Check your devices information (IPv6 address, online/offline, owner etc.)
+- Check your devices information (IPv6 address, online/offline status, who is owner etc.)
 - in commercial plans accessing your billing data and managing subscriptions.
 - accessing your Dashboard API tokens (available only in some of commercial plans)
 
@@ -22,19 +22,19 @@ This manual describes how to use **Husarnet Dashboard** web app which public ver
 
 ## Create a network
 
-To create a new Husarnet network, just log into **Husarnet Dashboard** main panel, click **[Create network]** button, and in the pop-up choose a name and click **[Create]** button. Newly created, empty network panel will open that looks like this:
+To create a new Husarnet network, log into **Husarnet Dashboard** main panel, click **[Create network]** button, in the pop-up choose a name and click **[Create]** button. Newly created, empty network panel will open that looks like this:
 
 ![new network window](/static/img/manual/firstnetwork.png)
 
-You can change network view setting by clicking a red knob on the right and you will see the following pop-up:
+You can change network view setting by clicking a **[red cog icon]** on the right where you will find the following options:
 
 ![new network window](/static/img/manual/netsettings.png)
 
 You can choose which information you would like to display in the specific network panel:
 - **Status** of each device (online/offline)
-- **Address** is Husarnet IPv6 address of each device
-- **Owner** of the specific device in the network. Because you can share your network to other users, thanks to that column you will see which user is the owner of that device.
-- **Info** some extra information about the specific device like `ROS master` or accessing a `Web UI` if you configure it.
+- **Address** - Husarnet IPv6 address of each device
+- **Owner** of the specific device in the network. Because you can share your network to other users, thanks to that column you will see which user is the owner of the given device.
+- **Info** some extra information about the specific device like `ROS master` or otpion to access a `Web UI` if you configure it.
 
 You can also change a default icon that allows you to easily distinguish your specific network from others. **Remember to use only 200x200px PNG images here!!!**.
 
@@ -51,11 +51,11 @@ Now you can add new devices in a few ways:
 ------
 ### [terminal tab]
 
-This method uses `husarnet websetup` command that you need to execute from the level of command line from devices with **Husarnet Client** installed that you want to connect. After executing this command, the unique link is generated. If you open it in the web browser and you are logged into your **Husarnet Dashboard** account you will see something like this:
+This method shows how to use `husarnet websetup` command that you need to execute from the level of command line on devices with **Husarnet Client**. After executing this command, the unique link is generated. If you open it in the web browser, and you are logged into your **Husarnet Dashboard** account you will see something like this:
 
 ![websetup page in dashboard](/static/img/manual/websetup.png)
 
-Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices without knowing it's Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will changed. In other words if you will open your Linux terminal you will see:
+Name your device here (this hostname will be used by other devices in your Husarnet networks to reach your devices as a second way next to just using Husarnet IPv6 address) and select a network from your **Husarnet Dasbhoard** account to which you want to add this device. By selecting a checkbox `Change device hostname to [hostnameYouJustUsed]. Recommended for ROS`, also the hostname in your OS level will be changed. In other words if you will open your Linux terminal you will see:
 
 ```bash
 user@hostnameYouJustUsed:~$ _
@@ -77,7 +77,7 @@ This method is dedicated mainly for connecting mobile phones to the Husarnet net
 **Beta version of Husarnet Client for Android** looks like this:
 <center><img src={"/static/img/manual/scanqr_android.jpg"} width="300"/></center>
 
-After clicking **Scan QR code** button in **Husarnet Client for Android** app you will be asked for a permision to your camera by Android OS and when you agree, you will be able to scan a QR code displayed in the **scan QR tab** in **Husarnet Dashboard**. That's a very handy way to connect devices equipped in camera to your Husarnet networks.
+After clicking **Scan QR code** button in **Husarnet Client for Android** app you will be asked for a permision to your camera by Android OS and when you agree, you will be able to scan a QR code displayed in the **scan QR tab** in **Husarnet Dashboard**. That's a very handy way to connect devices equipped with camera to your Husarnet networks.
 
 ------
 ### [cloud tab]
@@ -89,7 +89,7 @@ This tab allows you to add preconfigured, hosted on public cloud microservices t
 
 ![cloud elements](/static/img/manual/cloud.png)
 
-These microservices are seen from a level of other devices in the network as a separate device. Currently available microservices in our Beta program are:
+These microservices are seen from a level of other devices in the network as separate devices. Currently available microservices in our beta program are:
 - **web terminal** you can SSH your Husarnet devices from a level of https://app.husarnet.com from any devices if you only know credentials to your account (even outside Husarnet network)
 - **ROS SLAM implementations** this microservice could by used by your ROS robots for outsourcing computation heavy task of simultanously localization and map creation.
 
@@ -99,11 +99,13 @@ Cloud microservices will no be available for Self-hosted plans.
 ### [join code tab]
 
 
-This is a second, next to `websetup` way to connect your device to the Husarnet network using a Linux command line that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. 
+This is a second, next to `websetup` way to connect your device to Husarnet network using a Linux command line, that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. 
 
 ![join code tab](/static/img/manual/dashboard_joincode.png)
 
-Keep your **join code** secret! If you consider your **join code** might be compromised, click **Reset join code** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+:::warning
+Keep your **join code** secret! If you consider your **join code** might be compromised, click **[Reset join code]** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
+:::
 
 #### Usage example:
 ```bash
@@ -122,7 +124,7 @@ johny@johnylaptop:~$
 ------
 ### [already added tab]
 
-If you already connected your device to your **Husarnet Dashboard** you can add it to other networks. One device could be in one or multiple networks at once.
+If you already have connected your device to **Husarnet Dashboard** you can add it to other networks this way. One device could be in one or multiple networks at once.
 
 ![already added tab](/static/img/manual/alreadyadded.png)
 
@@ -131,7 +133,7 @@ All your devices already connected to your account are available under the dropd
 ------
 ### [address tab]
 
-As described [in the Husarnet Client manual](/docs/manual-client#managing-husarnet-client-manually) you can manually add other devices to the whitelist if only you know their Husarnet IPv6 address. Instead using command line, you can add new devices to the whitelist by using this tab.
+As described [in the Husarnet Client manual](/docs/manual-client#managing-husarnet-client-manually) you can manually add other devices to the whitelist if only you know their Husarnet IPv6 address. Instead of using command line, you can add new devices to the whitelist by using this tab.
 
 :::info
 https://app.husarnet.com will not manage the whitelist on this device, for example you will not see whether it is online or offline.
@@ -143,9 +145,9 @@ https://app.husarnet.com will not manage the whitelist on this device, for examp
 
 ## Sharing networks to other users
 
-To share a network you need at first open that network and click **[Share]** button in the top panel. You will see a new pop-up where you can place account names (e-mail addresses used during registration on **Husarnet Dashboard**) of users to who you want to share your network.
+To share a network you need at first to open that network and click **[Share]** button in the top panel. You will see a new pop-up where you can place account names (email addresses used during registration on **Husarnet Dashboard**) of users to whom you want to share your network.
 
-Below there is a list of users that already have access to your network. You can remove access to given users by clicking **[X]** button that is next to each e-mail.
+Below, there is a list of users that already have access to your network. You can remove access to given users by clicking **[X]** button that is located next to each email.
 
 ![sharing window](/static/img/manual/share1.png)
 
@@ -153,7 +155,7 @@ When you share a network to a specific user, this user will see your invitation 
 
 ![accept shared network](/static/img/manual/share2.png)
 
-After clicking **[Accept]** button this networks will be listed next to other network of that user. If that user no longer want to have access to a network somebody shared, the user need to open shared network, and click a **[Unshare]** button.
+After clicking **[Accept]** button this networks will be listed next to other networks of the user. If the user no longer wants to have access to a network somebody shared, he needs to open a shared network, and click a **[Unshare]** button.
 
 <!-- ## Check status of your networks and devices -->
 
@@ -167,7 +169,7 @@ If there is a HTTP server listening on port 8000 on the Husarnet interface, "Web
 ![accept shared network](/static/img/manual/webui1.png)
 <!-- <div class="image"><img src="/img/web-ui/net.png"/></div> -->
 
-Clicking the button will navigate you to a page with URL like `https://XXXX.husarnetusers.com`. On that address there is a server that securely proxies the requests to your device. The page is available only to you (and requires you to login to your account).
+Clicking the button will navigate you to a page with URL like `https://XXXX.husarnetusers.com`. On that address there is a server that securely proxies the requests to your device. The page is available only to you (and requires you to login to your account). That proxy server is very limited, so this feature is for simple web UI sending small amount of data - like a web UI of IoT sensor. If you would like to access a web UI with high datarate and low latency, connect to it from a level o Husarnet network directly, not over the proxy server.
 
 :::danger Warning
 Login page will always have URL starting with `https://app.husarnet.com/`. 
@@ -179,7 +181,7 @@ Login page will always have URL starting with `https://app.husarnet.com/`.
 
 By default, the interface is accessiable only to you. However, you can make the web UI public, so anyone who knows the address, will be able to access the interface.
 
-To make the interface public, open element settings (by clicking its name in the network screen) and toggle "Make the Web UI public" checkbox. Then you can copy the address of the page accessible using "Open Web UI" button and send it to someone.
+To make the interface public, open element settings (by clicking its name in the network screen) and toggle "Make the Web UI public" checkbox. Then you can copy the address of the page accessible using **[Open Web UI]** button and send it to someone.
 
 :::danger Warning
 Everyone will be able to access the Web UI! Make sure it is written in a secure way. Most elements from the Husarnet Marketplace assume that they won't be made public.
@@ -201,10 +203,10 @@ The Web UI URL has form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com` where 
 ## Husarnet Dashboard API
 
 :::info
-Access to Husarnet Dashboard API is possible only in **Public/Enterprise** plan and all **Self hosted** plans.
+Access to Husarnet Dashboard API is available only in **Public/Enterprise** plan and all **Self hosted** plans.
 :::
 
-Thanks to **Husarnet Dashboard API** you can manage your network, add devices etc. without doing that manually from a level of http://app.husarnet.com. Thanks to that approach you can automate those processes by your own scripts that might be useful if you want for example to embed Husarnet functionality into products your are going to provide to a third party.
+Thanks to **Husarnet Dashboard API** you can manage your networks, add devices etc. without doing that manually from a level of http://app.husarnet.com. You can automate those processes by your own scripts that might be useful if you want for example to embed Husarnet functionality into products your are going to provide to a third party.
 
 ### Authorization
 
