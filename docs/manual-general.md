@@ -30,7 +30,7 @@ This architecture seems to be simple, but you have to be aware of its drawbacks.
 
 ### Solution provided by Husarnet
 
-Husarnet solves these problems by having a peer-to-peer architecture. Central server (**Husarion Base**) only helps in establishing connections over the Internet. LAN connections may be established without any Internet access.
+Husarnet solves these problems by having a peer-to-peer architecture. Central server (**Husarnet Base**) only helps in establishing connections over the Internet. LAN connections may be established without any Internet access.
 
 Husarnet, in it's core, is one big, automatically routed, IPv6 network. Running Husarnet daemon creates a virtual network interface (`hnet0`) with an unique Husarnet IPv6 address and associated `fc94::/16` route. If the permission system is disabled, any node can reach any other on its IPv6 `fc94:...` address.
 
@@ -46,7 +46,7 @@ For convenience, Husarnet also includes simple (but robust) hostname management 
 
 ## How connections are established?
 
-1. First, the **Husarnet Client** connects to the **Husarnet Base Server** (via TCP on port 443 and optionally UDP on port 5582) hosted by Husarion. Husarions runs multiple geographically distributed **Husarnet Base Servers**.
+1. First, the **Husarnet Client** connects to the **Husarnet Base Server** (via TCP on port 443 and optionally UDP on port 5582) hosted by Husarnet company. Husarnet company runs multiple geographically distributed **Husarnet Base Servers**.
 2. Initially the encrypted data is tunnelled via the **Husarnet Base Server**.
 3. The devices attempt to connect to local IP addresses (retrieved via the Base Server). This will succeed if they are in the same network or one of them has public IP address (and UDP is not blocked).
 4. The devices attempt to perform NAT traversal assisted by the Base Server. This will succeed if NAT is not symmetric and UDP is not blocked on the firewall.

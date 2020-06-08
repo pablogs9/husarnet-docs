@@ -318,6 +318,3 @@ request body:
     "id": <id>
 }
 ```
-
-
-
