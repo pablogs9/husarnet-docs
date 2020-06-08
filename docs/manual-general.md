@@ -10,23 +10,23 @@ image: https://i.imgur.com/mErPwqL.png
 
 ## Introduction
 
-Husarnet is a global P2P network layer dedicated especially for robotic and IoT use cases with first class ROS support. It can be used however in much wider area such as automotive industry (V2V/V2X), and connecting distributed, critical resources like is Smart Grid. It can be used in typical use cases for VPN networks as well.
+Husarnet is a global P2P network layer dedicated especially for robotic and IoT use cases with first class ROS support. It can be however used in much more areas such as, for example, automotive industry (V2V/V2X) or connecting distributed, critical resources like Smart Grids. It can be used in typical use cases for VPN networks as well.
 
-Thanks to Husarnet you can connect your robots, servers, laptops and even microcontrollers to a single network that is independent from any external infrastructure. All traffic goes directly between your devices.
+Thanks to Husarnet you can connect your robots, servers, laptops and even microcontrollers to a single network which is independent from any external infrastructure. All traffic goes directly between your devices.
 
 ## Architecture
 
 ### Common solutions
 
-Standard solution for connecting devices over Internet uses client-server architecture. All devices connected over the internet can communicate to each other only over the central server.
+Standard solution for connecting devices over Internet uses client-server architecture. All devices connected over the internet can communicate with each other only over the central server.
 
 This architecture seems to be simple, but you have to be aware of its drawbacks. From an user point of view:
 
-- users can be spied by the service provider,
-- devices will cease to work when the service provider stops supporting the servers,
-- devices need internet access to function, LAN connectivity doesn't suffice,
-- larger latency in communication between elements connected to the system,
-- if your infrastructure is self-hosted you need to maintain a central server for which requirements for RAM and vCPU's are growing rapidly while you scale your network. 
+- users can be spied by the service provider
+- devices will cease to work when the service provider stops supporting the servers
+- devices need internet access to function, LAN connectivity doesn't suffice
+- larger latency in communication between elements connected to the system
+- if your infrastructure is self-hosted you need to maintain a central server for which requirements for RAM and vCPU's are growing rapidly while you scale your network
 
 ### Solution provided by Husarnet
 

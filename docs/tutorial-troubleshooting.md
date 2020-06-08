@@ -16,7 +16,7 @@ For a brief status of the established connections, execute:
 sudo husarnet status
 ```
 
-The output will look like this:
+The output will look something like this:
 
 ```bash
 Husarnet IP address: fc94:7196:e39f:23ff:fe45:81aa:39e4:b224

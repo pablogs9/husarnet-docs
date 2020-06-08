@@ -13,7 +13,7 @@ This manual describes how to use **Husarnet Client** app on Linux. Your devices 
 ## Installation methods
 
 ### I. Single command (recommended)
-The simplest way to install Husarnet is to paste the following line to your terminal:
+The simplest way to install Husarnet is to paste the following line into your terminal:
 
 ```bash
 curl https://install.husarnet.com/install.sh | sudo bash
@@ -30,7 +30,7 @@ This method works on APT and Yum based Linux distributions such as Debian, Ubunt
 
 ### II. Setting up the Debian/Ubuntu repository manually
 
-You can also set up the Debian (works for all reasonably new versions of Ubuntu and Debian) repository manually:
+You can also set up Debian (works for all reasonably new versions of Ubuntu and Debian) repository manually:
 
 ```
 curl https://install.husarnet.com/key.asc | apt-key add -
@@ -54,7 +54,7 @@ yum install -y husarnet
 
 **Warning: this is not the recommended installation method. You won't get automatic software updates this way!**
 
-If your Linux distribution is not supported by the one-command install method, you can also download the binary package. For most seamless experience, it is recommended to unpack it to the root directory (`/`):
+If your Linux distribution is not supported by the one-command install method, you can also download the binary package. For most seamless experience, it is recommended to unpack it in the root directory (`/`):
 
 ```bash
 curl https://install.husarnet.com/tgz/husarnet-latest-amd64.tgz > husarnet-latest-amd64.tgz
@@ -69,7 +69,7 @@ If you are using systemd, enable and start the service (`systemctl enable husarn
 
 **Husarnet Dashboard** is a web application allowing you to:
 - Create and remove new Husarnet networks (your device can be in one or multiple Husarnet networks in the same time).
-- Share your Husarnet networks to other users with configurable access rights.
+- Share your Husarnet networks with other users with configurable access rights.
 - Add devices to your networks in a few ways (websetup, join code, QR code, already linked to your account)
 - Removing devices from network or from your account
 - Checking your devices information (IPv6 address, online/offline, owner etc.)
@@ -79,7 +79,7 @@ If you are using systemd, enable and start the service (`systemctl enable husarn
 
 If you add devices to the specific Husarnet network all devices from this network see your device like it was in the same LAN network and they are whitelisting automatically. To learn more about **Husarnet Dashboard** app visit [its documentation page](/docs/manual-dashboard).
 
-You can add your device to a Husarnet network shared to you by other **Husarnet Dashboard** user. And your device can be in the same time connected to your other, private Husarnet networks that will be accessible only by you. Such a scenario is good if you would like to give someone an access to the specific device that is connected to your **Husarnet Dashboard** account. Just place this device in the separate, newly created Husarnet network and share this network to one or multiple users. Another use case would be creating an ad-hoc network for working group, for LAN gaming etc..
+You can add your device to a Husarnet network shared to you by other **Husarnet Dashboard** user. And your device can be in the same time connected to your other, private Husarnet networks which will be accessible only by you. Such a scenario is good if you would like to give someone an access to the specific device that is connected to your **Husarnet Dashboard** account. Just place this device in the separate, newly created Husarnet network and share this network to one or multiple users. Another use case would be creating an ad-hoc network for working group, for LAN gaming etc..
 
 Public version of **Husarnet Dashboard** is available under this link: https://app.husarnet.com. There are also self-hosted commercial versions. For more details visit pricing page.
 
@@ -88,7 +88,7 @@ Public version of **Husarnet Dashboard** is available under this link: https://a
 
 **Warning: this is not the recommended method of using Husarnet.**
 
-Sometimes managing the devices via Husarnet Dashboard can be cumbersome. You can skip connecting your device to the Dashboard and manage whitelist and hostnames via command line.
+Sometimes managing devices via Husarnet Dashboard can be cumbersome. You can skip connecting your device to the Dashboard and manage whitelist and hostnames via command line.
 
 If not the whitelist, you could reach any device connected to Husarnet without any configuration if you only know its Husarnet IPv6 address. If that suits you, simply disable it on all devices - `husarnet whitelist disable`. Be aware of security implications of this action (e.g. do this only if you are confident that your firewall is strong enough).
 
@@ -135,7 +135,7 @@ sudo husarnet whitelist enable
 
 ### `whitelist disable`
 
-All devices, even owned by other users will be able to reach your device as long if they only know your device's IPv6 address.
+All devices, even owned by other users will be able to reach your device as long as they know your device's IPv6 address.
 
 #### Usage example:
 ```bash
@@ -186,7 +186,7 @@ Analyzing the output:
 
 - Peer `fc94:...:932a` is a Websetup Server address that is a part of **Husarnet Dashboard**. It provides a list of peers to your device running **Husarnet Client** with their hostnames and is also used to connect devices to Husarnet networks.
 
-- Peer `fc94:...:ae4e` output is a little bit diffrent that in case of `fc94:...:c227`. Instead of `target= ... ` there is `tunnelled`. That means peer-to-peer connection was not possbile for some reason, and tunneling a traffic through a **Husarnet Base Server** was needed. This is not expected behavior - probably you will need to change your network configuration. Read more in a [troubleshooting guide](/docs/tutorial-troubleshooting).
+- Peer `fc94:...:ae4e` output is a little bit diffrent that in case of `fc94:...:c227`. Instead of `target= ... ` there is `tunnelled`. That means peer-to-peer connection was not possbile for some reason, and tunneling a traffic through a **Husarnet Base Server** was needed. This is not an expected behavior - probably you will need to change your network configuration. Read more in a [troubleshooting guide](/docs/tutorial-troubleshooting).
 
 <!-- ### `genid`
 
@@ -216,7 +216,7 @@ Go to https://app.husarnet.com/husarnet/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### `join`
 
-This is second, next to `websetup`, command way to connect your device to a Husarnet network that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. To find your **join code**, unique for each network, you need to log into your account at https://app.husarnet.com, select a network, click **Add element** button and go to a **[join code]** tab.
+This is a second, next to `websetup`, command way to connect your device to a Husarnet network which is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. To find your **join code**, unique for each network, you need to log into your account at https://app.husarnet.com, select a network, click **Add element** button and go to a **[join code]** tab.
 
 :::warning
 Keep your **join code** secret! If you consider your **join code** might be compromised, click **[Reset join code]** button in a **[join code]** tab. Devices that already were connected using previous join code, still will be in you Husarnet networks, however previous join code will not be valid for adding new devices to your networks. 
