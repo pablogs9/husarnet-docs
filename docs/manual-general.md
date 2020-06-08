@@ -10,27 +10,27 @@ image: https://i.imgur.com/mErPwqL.png
 
 ## Introduction
 
-Husarnet is a global P2P network layer dedicated especially for robotic and IoT use cases with first class ROS support. It can be used however in much wider area such as automotive industry (V2V/V2X), and connecting distributed, critical resources like is Smart Grid. It can be used in typical use cases for VPN networks as well.
+Husarnet is a global P2P network layer dedicated especially for robotic and IoT use cases with first class ROS support. It can be however used in much more areas such as, for example, automotive industry (V2V/V2X) or connecting distributed, critical resources like Smart Grids. It can be used in typical use cases for VPN networks as well.
 
-Thanks to Husarnet you can connect your robots, servers, laptops and even microcontrollers to a single network that is independent from any external infrastructure. All traffic goes directly between your devices.
+Thanks to Husarnet you can connect your robots, servers, laptops and even microcontrollers to a single network which is independent from any external infrastructure. All traffic goes directly between your devices.
 
 ## Architecture
 
 ### Common solutions
 
-Standard solution for connecting devices over Internet uses client-server architecture. All devices connected over the internet can communicate to each other only over the central server.
+Standard solution for connecting devices over Internet uses client-server architecture. All devices connected over the internet can communicate with each other only over the central server.
 
 This architecture seems to be simple, but you have to be aware of its drawbacks. From an user point of view:
 
-- users can be spied by the service provider,
-- devices will cease to work when the service provider stops supporting the servers,
-- devices need internet access to function, LAN connectivity doesn't suffice,
-- larger latency in communication between elements connected to the system,
-- if your infrastructure is self-hosted you need to maintain a central server for which requirements for RAM and vCPU's are growing rapidly while you scale your network. 
+- users can be spied by the service provider
+- devices will cease to work when the service provider stops supporting the servers
+- devices need internet access to function, LAN connectivity doesn't suffice
+- larger latency in communication between elements connected to the system
+- if your infrastructure is self-hosted you need to maintain a central server for which requirements for RAM and vCPU's are growing rapidly while you scale your network
 
 ### Solution provided by Husarnet
 
-Husarnet solves these problems by having a peer-to-peer architecture. Central server (**Husarion Base**) only helps in establishing connections over the Internet. LAN connections may be established without any Internet access.
+Husarnet solves these problems by introducing a peer-to-peer architecture. Central server (**Husarion Base**) only helps in establishing connections over the Internet. LAN connections may be established without any Internet access.
 
 Husarnet, in it's core, is one big, automatically routed, IPv6 network. Running Husarnet daemon creates a virtual network interface (`hnet0`) with an unique Husarnet IPv6 address and associated `fc94::/16` route. If the permission system is disabled, any node can reach any other on its IPv6 `fc94:...` address.
 
@@ -46,7 +46,7 @@ For convenience, Husarnet also includes simple (but robust) hostname management 
 
 ## How connections are established?
 
-1. First, the **Husarnet Client** connects to the **Husarnet Base Server** (via TCP on port 443 and optionally UDP on port 5582) hosted by Husarion. Husarions runs multiple geographically distributed **Husarnet Base Servers**.
+1. First, the **Husarnet Client** connects to the **Husarnet Base Server** (via TCP on port 443 and optionally UDP on port 5582) hosted by Husarion. Husarion runs multiple geographically distributed **Husarnet Base Servers**.
 2. Initially the encrypted data is tunnelled via the **Husarnet Base Server**.
 3. The devices attempt to connect to local IP addresses (retrieved via the Base Server). This will succeed if they are in the same network or one of them has public IP address (and UDP is not blocked).
 4. The devices attempt to perform NAT traversal assisted by the Base Server. This will succeed if NAT is not symmetric and UDP is not blocked on the firewall.

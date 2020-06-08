@@ -8,7 +8,7 @@ keywords:
 image: https://i.imgur.com/mErPwqL.png
 ---
 
-This quick start guide describes how to install **Husarnet VPN Client** software on your computers running Linux and how to configure a network using **Husarnet Dashboard** in a few easy steps.
+This quick start guide describes how to install **Husarnet VPN Client** software on your computers running Linux and how to configure a network using **Husarnet Dashboard** in few easy steps.
 
 ## I. Create a network
 
@@ -18,7 +18,7 @@ Log in to [Husarnet Dashboard](https://app.husarnet.com), click **[Create networ
 
 ## II. Get a join code
 
-Click **[Add element]** button, select **[join code]** tab and copy your join code that looks like this: 
+Click **[Add element]** button, select **[join code]** tab and copy your join code which looks something like this: 
 ```
 fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/XXXXXXXXXXXXXXXXXXXXX
 ```
@@ -61,6 +61,6 @@ Just be aware that the servers and client you are using must support IPv6 (as Hu
 
 More resources:
 - [Husarnet Client manual page](/docs/manual-client) to read more about Husarnet Client app you just installed.
-- [Husarnet Dashboard manual page](/docs/manual-dashboard) to read more how you can manage your networks in an easy way,
-- [Husarnet Hackster profile](https://hackster.io/husarnet/projects) containing a simple projects that might inspire you how you can use Husarnet or just for fun.
+- [Husarnet Dashboard manual page](/docs/manual-dashboard) to read more about how you can manage your networks in an easy way.
+- [Husarnet Hackster profile](https://hackster.io/husarnet/projects) containing a simple projects that might inspire you.
 

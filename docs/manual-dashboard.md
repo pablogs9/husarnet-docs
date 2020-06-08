@@ -51,7 +51,7 @@ Now you can add new devices in a few ways:
 ------
 ### [terminal tab]
 
-This method shows how to use `husarnet websetup` command that you need to execute from the level of command line on devices with **Husarnet Client**. After executing this command, the unique link is generated. If you open it in the web browser, and you are logged into your **Husarnet Dashboard** account you will see something like this:
+This method shows how to use `husarnet websetup` command which you need to execute from the level of command line on devices with **Husarnet Client**. After executing this command, the unique link is generated. If you open it in the web browser, and you are logged into your **Husarnet Dashboard** account you will see something like this:
 
 ![websetup page in dashboard](/static/img/manual/websetup.png)
 
@@ -83,7 +83,7 @@ After clicking **Scan QR code** button in **Husarnet Client for Android** app yo
 ### [cloud tab]
 
 :::info AVAILABLE ONLY IN BETA VERSION
-Husarnet Marketplace is currently a closed beta functionality. If you are interested in testing it, please contact us via an email contact@husarnet.com and describe your use-case. 
+Husarnet Marketplace is currently a closed beta functionality. If you are interested in testing it, please contact us via an email at contact@husarnet.com and describe your use-case. 
 :::
 This tab allows you to add preconfigured, hosted on public cloud microservices to your existing Husarnet networks. 
 
@@ -91,15 +91,15 @@ This tab allows you to add preconfigured, hosted on public cloud microservices t
 
 These microservices are seen from a level of other devices in the network as separate devices. Currently available microservices in our beta program are:
 - **web terminal** you can SSH your Husarnet devices from a level of https://app.husarnet.com from any devices if you only know credentials to your account (even outside Husarnet network)
-- **ROS SLAM implementations** this microservice could by used by your ROS robots for outsourcing computation heavy task of simultanously localization and map creation.
+- **ROS SLAM implementations** this microservice could be used by your ROS robots for outsourcing computation heavy task of simultanously localization and map creation.
 
-Cloud microservices will no be available for Self-hosted plans.
+Cloud microservices will not be available for Self-hosted plans.
 
 ------
 ### [join code tab]
 
 
-This is a second, next to `websetup` way to connect your device to Husarnet network using a Linux command line, that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. 
+This is a second, next to `websetup`, way to connect your device to Husarnet network using a Linux command line, that is also described in the [first start guide for Linux](/docs/begin-linux). If you have many devices that you want to connect to your Husarnet network at once, or you do not have access to a web browser this method is the most convenient. 
 
 ![join code tab](/static/img/manual/dashboard_joincode.png)
 
@@ -192,7 +192,7 @@ Everyone will be able to access the Web UI! Make sure it is written in a secure 
 
 ### Details
 
-The Web UI URL has form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com` where `fcXXXXXXXXXXXXXX` is the Husarnet device IP (without colons) and `PORT` is the TCP port of the service running on a device. For security, only ports 8000 and 8001 are allowed. URLs in form `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com/__port_PORT2/` (e.g. `https://fcXXXXXXXXXXXXXX-8000.husarnetusers.com/__port_8001/`) are special - PORT2 overwrites PORT. This form is useful for accessing websocket servers.
+The Web UI URL has a form of `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com` where `fcXXXXXXXXXXXXXX` is the Husarnet device IP (without colons) and `PORT` is the TCP port of the service running on a device. For security, only ports 8000 and 8001 are allowed. URLs in a form of  `https://fcXXXXXXXXXXXXXX-PORT.husarnetusers.com/__port_PORT2/` (e.g. `https://fcXXXXXXXXXXXXXX-8000.husarnetusers.com/__port_8001/`) are special - PORT2 overwrites PORT. This form is useful for accessing websocket servers.
 
 <!-- ## Account security
 
