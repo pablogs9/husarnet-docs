@@ -210,25 +210,63 @@ Thanks to **Husarnet Dashboard API** you can manage your networks, add devices e
 
 ### Authorization
 
-Go to https://app.husarnet.com/api-token to retrieve your token.
+Go to https://app.husarnet.com/api-token to retrieve your Dashboard API token.
 
 ### `GET /api/networks/`
 
 This endpoint returns list of networks which are owned by the current user.
 
 ```bash
-$ curl -H 'Authorization: Token yourtoken' -v 'https://app.husarnet.com/api/networks/'
+$ curl -H 'Authorization: Token xxx...xx' -v 'https://app.husarnet.com/api/networks/'
 ```
+
+where `xxx...xx` is your Dashboard API token.
+
+Output example:
 
 ```json
 {
   "networks": [
     {
-      "url": "/api/network/5",
-      "owner": 2,
+      "url": "/api/network/12948",
+      "owner": 2981,
       "name": "my-network",
+      "share_token": "xxxx:xxxxxx:xxxxxxxxxxx_xxxxxxxxxxxx-xx",
+      "join_code": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "url": "/api/network/12248",
+      "owner": 2981,
+      "name": "homenet",
+      "share_token": "xxxx:xxxxxx:xxxxxxxxxxx_xxxxxxxxxxxx-xx",
+      "join_code": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxxxxxxxxxxxxxxxxxxxxx"
     }
   ]
+}
+```
+
+### `POST /api/networks/`
+
+Add new, empty network to the Dashboard.
+
+```bash
+$ curl -H 'Authorization: Token xxx...xx' -v 'https://app.husarnet.com/api/networks/' --data '{"name": "my-new-net-name"}' -H 'content-type: application/json' -X POST
+```
+
+where `xxx...xx` is your Dashboard API token.
+
+Output example:
+
+```json
+{
+    "status": "ok",
+    "network": {
+        "url": "/api/network/14593",
+        "owner": 2981,
+        "name": "my-new-net-name",
+        "share_token": "xxxx:xxxxxx:xxxxxxxxxxx_xxxxxxxxxxxx-xx",
+        "join_code": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxxxxxxxxxxxxxxxxxxxxx"
+    }
 }
 ```
 
@@ -237,26 +275,32 @@ $ curl -H 'Authorization: Token yourtoken' -v 'https://app.husarnet.com/api/netw
 This endpoint returns detailed information about a network, including list of members.
 
 ```bash
-$ curl -H 'Authorization: Token yourtoken' -v 'https://app.husarnet.com/api/network/5'
+$ curl -H 'Authorization: Token xxx...xx' -v 'https://app.husarnet.com/api/network/12948'
 ```
+
+where `xxx...xx` is your Dashboard API token.
+
+Output example:
 
 ```json
 {
   "url": "/api/network/5",
-  "owner": 2,
+  "owner": 2981,
   "name": "my-network",
+  "share_token": "xxxx:xxxxxx:xxxxxxxxxxx_xxxxxxxxxxxx-xx",
+  "join_code": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxxxxxxxxxxxxxxxxxxxxx",
   "ros-master": 3,
   "members": [
     {
       "id": 18,
       "name": "test",
-      "device-id": "fc94:XXX",
+      "device-id": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx",
       "online": false
     },
     {
       "id": 3,
       "name": "mymachine",
-      "device-id": "fc94:YYY",
+      "device-id": "fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx",
       "online": null
     }
   ]
