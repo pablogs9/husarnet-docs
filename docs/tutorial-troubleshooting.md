@@ -81,7 +81,11 @@ On some machines, before accessing them over SSH (`$ssh user@husarnet_hostname` 
 ```bash
 ssh: connect to host husarnet_hostname port 22: Connection refused
 ```
-To overcome that issue, execute in the terminal of the device you are trying to reach over SSH: `$ service ssh restart`.
+To overcome that issue, execute in the terminal of the device you are trying to reach over SSH: 
+```bash
+$ sudo apt-get install ssh
+$ service ssh restart
+```
 
 ## Reporting problems
 
