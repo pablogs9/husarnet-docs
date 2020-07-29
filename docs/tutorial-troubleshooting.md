@@ -75,6 +75,14 @@ Otherwise, there will be a line containing `target=XXXX`, where XXXX is the inte
 
 Hostnames of the devices in Husarnet network are stored in `/etc/hosts` in lines with `# managed by Husarnet` comment. They are modified automatically by the Husarnet daemon.
 
+## SSH connection issue
+
+On some machines, before accessing them over SSH (`$ssh user@husarnet_hostname` command) you might see the following error:
+```bash
+ssh: connect to host husarnet_hostname port 22: Connection refused
+```
+To overcome that issue, execute in the terminal of the device you are trying to reach over SSH: `$ service ssh restart`.
+
 ## Reporting problems
 
 If you still have problems, you can report the problem by sending mail to `support@husarnet.com`. Please describe your problem and attach Husarnet log. You can retrieve the log using the following command:
