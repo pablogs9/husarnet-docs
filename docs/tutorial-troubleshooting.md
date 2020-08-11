@@ -61,7 +61,7 @@ This message means that most likely there is no internet connection. You will be
 
 Each `Peer fcXX:YYY` section contains information about connection to a specific peer.
 
-If the second line contains `tunnelled`, that means that you have no direct connection to the peer - this negatively impacts latency and performance. This is most likely caused by restrictive firewall or symmetric NAT. Here are some tips on how to fix it:
+If the second line contains `tunnelled`, that means that you have no direct connection to the peer - this negatively impacts latency and performance. This is most likely caused by restrictive firewall, symmetric NAT or beeing behing carrier-grade NAT (CGNAT). Here are some tips on how to fix it:
 
 - allow all UDP traffic on the firewall
 - change NAT type to Full-cone or Port-restricted in your router configuration (it is often called Open or Moderate in router settings)
@@ -70,7 +70,17 @@ If the second line contains `tunnelled`, that means that you have no direct conn
 - execute `conntrack -F` on Linux router or virtual machine host
 
 Otherwise, there will be a line containing `target=XXXX`, where XXXX is the internet address used for communication with this node.
+## Tunneled connection when behind CGNAT
+Some ISPs, usually mobile carriers, utilise carrier-grade NAT. As a result it is impossible to establish peer-to-peer connection with device hidden behind it.
 
+How to check if you are behind CGNAT:
+
+The easiest way is to check IP address given to you by ISP: 
+  - ICAAN allocated IP4 address block for CGNAT is `100.64.0.0/10`, however some carriers utilise other private IP4 ranges, such as `10.0.0.0/8` or `172.16.0.0/12`
+  - If there is a router in your network, login into its web panel and check IP on WAN.
+  - In case of LTE modem plugged directly into your computer execute command in the terminal 'ip a' - and check IP on outbound interface
+  
+If you verified, that you are behind CGNAT and are unable to achieve peer-to-peer connection there is solution. Most ISPs offer service to get public external IP - contact with your ISPs customer service to obtain it. Its important to note, that it does not have to be static address - just public. 
 ## /etc/hosts
 
 Hostnames of the devices in Husarnet network are stored in `/etc/hosts` in lines with `# managed by Husarnet` comment. They are modified automatically by the Husarnet daemon.
