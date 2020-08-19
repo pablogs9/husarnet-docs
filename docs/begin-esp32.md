@@ -211,7 +211,6 @@ There is also a **python** folder containing a code that will be executed on you
 
 - open `Tools -> Manage Libraries...`
 - search for `ArduinoJson`
-- select version `5.13.3`
 - click install button
 
 **Install arduinoWebSockets library (Husarnet fork):**
