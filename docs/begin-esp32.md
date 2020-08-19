@@ -565,6 +565,66 @@ Your Husarnet connected devices see each other like they were in the same LAN ne
 
 Just be aware that the servers and client you are using must support IPv6 (as Husarnet is an IPv6 overlay network) - for example, you have to listen on "::", not "0.0.0.0".
 
+
+## Python2 issues with Arduino IDE and ESP32
+
+### install python2
+ESP32 CORE for ESP32 uses python2. In the Ubuntu 20.04 you have only python3 installed. To install python2 and setup that as a default "python" run those commands in the terminal
+
+```bash
+$ sudo apt install python2
+```
+
+The command:
+```bash
+$ sudo update-alternatives --list python
+```
+will return:
+```bash
+/usr/bin/python2
+/usr/bin/python3
+```
+
+To set whether default 'python' should be python2 or python3 run those commands: 
+```bash
+$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
+$ sudo update-alternatives --config python
+```
+
+To check your default 'python' version execute:
+```bash
+$ python -V
+```
+
+This guide is based on https://linuxconfig.org/install-python-2-on-ubuntu-20-04-focal-fossa-linux
+
+### install python "serial" module:
+
+When you first build you project probably you can see the error message like this:
+
+```bash
+Traceback (most recent call last):
+  File "/home/user1/.arduino15/packages/esp32-husarnet/hardware/esp32/1.2.1/tools/esptool/esptool.py", line 37, in <module>
+    import serial
+ImportError: No module named serial
+Multiple libraries were found for "WiFi.h"
+ Used: /home/user1/.arduino15/packages/esp32-husarnet/hardware/esp32/1.2.1/libraries/WiFi
+ Not used: /opt/arduino-1.8.13/libraries/WiFi
+exit status 1
+Error compiling for board ESP32 Dev Module.
+```
+
+At first you will need to install python pip. The process is described here: https://pip.pypa.io/en/stable/installing/
+
+Install python2 "serial" module execute the following command:
+
+```bash
+$ python -m pip install pyserial
+```
+
+
+
 #### More resources:
 - [Husarnet Dashboard manual page](/docs/manual-dashboard) to read more about how you can manage your networks in an easy way.
 - [Husarnet Hackster profile](https://hackster.io/husarnet/projects) containing simple projects which might inspire you.
