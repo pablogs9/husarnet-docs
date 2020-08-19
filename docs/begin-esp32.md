@@ -622,7 +622,15 @@ Install python2 "serial" module execute the following command:
 ```bash
 $ python -m pip install pyserial
 ```
-
+To access serial port as a normal user you will probably need to change `tty group`:
+```bash
+$ sudo usermod -a -G tty username
+$ sudo usermod -a -G dialout username
+```
+and then logout and login. If it doesn't help try with:
+```bash
+sudo chown username /dev/ttyUSB0
+```
 
 
 #### More resources:
