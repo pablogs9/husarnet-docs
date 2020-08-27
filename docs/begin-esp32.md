@@ -88,6 +88,7 @@ const char* password = "wifi-pass-for-ssid-1";
 // Husarnet credentials
 const char* hostName = "esp32basic";
 const char* husarnetJoinCode = "fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/xxxxxxxxxxxxxxxxxxxxxx";
+const char* dashboardURL = "app.husarnet.com";
 
 // Hostname of your laptop hosting a server
 const char* laptopHostname = "mylaptop1";
@@ -107,6 +108,7 @@ void setup()
   Serial.printf("done\r\nlocal IP: %s", WiFi.localIP());
 
   /* Start Husarnet */
+  Husarnet.selfHostedSetup(dashboardURL);
   Husarnet.join(husarnetJoinCode, hostName);
   Husarnet.start();
 }
@@ -256,6 +258,7 @@ const char* passwordTab[NUM_NETWORKS] = {
 // Husarnet credentials
 const char* hostName = "esp32basic";
 const char* husarnetJoinCode = "fc94:b01d:1803:8dd8:b293:5c7d:7639:932a/xxxxxxxxxxxxxxxxxxxxxx";
+const char* dashboardURL = "app.husarnet.com";
 
 #endif
 /* =============== config section end =============== */
@@ -393,6 +396,7 @@ void taskWifi( void * parameter ) {
   Serial.println(WiFi.localIP());
 
   /* Start Husarnet */
+  Husarnet.selfHostedSetup(dashboardURL);
   Husarnet.join(husarnetJoinCode, hostName);
   Husarnet.start();
 
