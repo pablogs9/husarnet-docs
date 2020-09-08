@@ -1,0 +1,5 @@
+quiet: true
+start_in_project_dir: true
+
+commands:
+    dev: docker-compose up --build dev
