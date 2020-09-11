@@ -10,7 +10,7 @@ module.exports = {
     'How it works':['old/info'],
   },
   docsSidebar: {
-    'Getting started':['begin-linux', 'begin-esp32'],
+    'Getting started':['begin-linux', 'begin-esp32', 'begin-esp32-platformio'],
     'Manuals':['manual-general','manual-client','manual-dashboard', 'manual-selfhosted'],
     'Tutorials':['tutorial-ros1','tutorial-ros2','tutorial-troubleshooting'/*,'tutorial-esp32-ota'*/],
   }

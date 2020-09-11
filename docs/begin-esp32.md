@@ -1,10 +1,12 @@
 ---
-sidebar_label: ESP32 (beta)
-title: Use Husarnet on ESP32 (beta)
+sidebar_label: ESP32 (beta) - Arduino
+title: Use Husarnet on ESP32 (beta) - Arduino variant
 custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/begin-esp32
 keywords:
   - vpn
   - p2p
+  - esp32
+  - arduino
 image: https://i.imgur.com/mErPwqL.png
 ---
 
