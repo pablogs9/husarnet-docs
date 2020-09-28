@@ -44,9 +44,12 @@ Default DDS implementation used in ROS2 Dashing is RMW FastRTPS. We will replace
 
 
 #### Build from source:
+
+When using ROS2 Foxy and later you can skip this step and install as a binary package 
+
 ```
 cd ros2_ws/src
-git clone https://github.com/ros2/rmw_cyclonedds
+git clone -b dashing-eloquent https://github.com/ros2/rmw_cyclonedds.git
 git clone https://github.com/eclipse-cyclonedds/cyclonedds
 cd ..
 rosdep install --from src -i
@@ -60,7 +63,7 @@ In ROS2 later than Dashing you can install as apt package
 ```
 apt install ros-eloquent-rmw-cyclonedds-cpp
 or
-apt install ros-dashing-rmw-cyclonedds-cpp
+apt install ros-foxy-rmw-cyclonedds-cpp
 ```
 
 ### Configure Cyclone DDS:
@@ -70,6 +73,8 @@ Create communication settings file under this path `~/ros2_ws/src/cyclonedds/cyc
 To make communication work you have to set some params as follows:
 
 You can provide Peer as IPv6 address or hostname from Husarnet. 
+
+**IMPORTANT**: Provide **all** peers <hostnames/IPv6 address>, (chose one) in every machine **remember to use []** .
 
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -84,8 +89,8 @@ You can provide Peer as IPv6 address or hostname from Husarnet.
         </General>
     <Discovery>
         <Peers>
-            <Peer address="[IPV6-address]"/>
-            <Peer address="[hostname]"/>
+            <Peer address="[IPV6-address]"/> <!-- example: <Peer address="[fc94:dd2c:a2e6:d645:1a36:****:****:****]"/> -->
+            <Peer address="[hostname]"/> <!-- example: <Peer address="[my-laptop]"/> -->
         </Peers>
         <ParticipantIndex>auto</ParticipantIndex>
     </Discovery>
