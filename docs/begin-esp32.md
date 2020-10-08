@@ -43,7 +43,7 @@ Open Arduino IDE and install the fork of **Arduino core for the ESP32** by follo
 - go to `File -> Preferences`
 - in a field `Additional Board Manager URLs` paste this link:
 ```
-https://files.husarion.com/arduino/package_esp32_index.json
+https://files.husarion.com/arduino/package_esp32_husarnet_index.json
 ```
 
 ![Board Manager URL](/img/getting-started/docs-arduino-url.png)
