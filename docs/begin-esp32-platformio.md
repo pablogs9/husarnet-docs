@@ -132,6 +132,44 @@ Repository URL: [simple-webserver](https://github.com/husarnet/husarnet-esp32/tr
 
 This example makes your ESP32 start a simple HTTP/web-server. It will be available both on the local network and via the Husarnet. You'll find the addres of your device in the dashboard. Put **`http://[ip_of_your_device]`** in your browser's address bar (**including the brackets** - that's the way you tell IPv6 addresses to your browser) and… voila. You should get a message from your ESP32 now!
 
+### Simple webcam
+
+Repository URL: [simple-webcam](https://github.com/husarnet/husarnet-esp32/tree/master/examples/simple-webcam)
+
+This example can be used if you have a module supported by [esp32cam](https://github.com/yoursunny/esp32cam/). It starts a webserver on `http://[your-device]:8000/stream` that is serving the live stream from the camera in the MJPEG format. Plain and simple.
+
+### Component template
+
+Repository URL: [component-template](https://github.com/husarnet/husarnet-esp32/tree/master/examples/component-template)
+
+This example is more of a proof of concept rather than a standalone application. Let's assume that you have a couple of devices, connected via Husarnet that you want to monitor and control from a single place. The classic way of achieving it would be to setup additional server, write a dedicated dashboard application and connect to it directly. This example presents a completely different approach as it makes your ESP32 serve a dashboard consisting of components loaded directly from other nodes on the network. Oh. And it auto-detects the nodes automatically. This way each time you add or remove a device from your network you don't have to reconfigure or update other nodes. You can, as usual, connect to any node on the network and see the updated version of a dashbaord almost instantly. The important part here is that your devices don't have to be homogeneous. **You can have different sets of components on each node, implementing completely different features and you won't need to update all your devices in order to add those to your network.** 
+
+#### How it's done?
+
+We're using the same technology Paypal does - [zoid](https://github.com/krakenjs/zoid). It allows us to specify some component data (like an *external* URL) and it'll render them in seamless iframes on demand. With some additional code you can even monitor or control multiple components with a single event. 
+
+If you want more technical details - look at the paragraphs below.
+
+#### `data.json`
+
+Each of the nodes in the network is serving a special file called `data.json`. It has two basic purposes 1) list other nodes on the network 2) list components for this given node. This way Java Script in your browser can do all the heavy lifting. First it calls your node for `data.json` and gets a list of other nodes, then it asks each node for that same file. If your node does not respond (for example your laptop is not expected to respond *in this example*) - it ignores it and continues, but if it responds with a valid data, it loads and renders specified components in your browser.
+
+Code for generating 1) is pretty much done - we don't expect you to change it a lot, but you're free to change the data for 2). You'll find in the next paragraph what can you do with that.
+
+#### Component files
+
+Look at the `dynamic` directory.
+
+You'll see the `index.html` file - that one handles all the logic described in the previous paragraph and is not expected to change a lot. Each of the changes here would require you to reflash all nodes on your network so please avoid it as much as possible.
+
+You'll also see pairs of files `something.js` and `something.html`. Each of those pairs defines a single component. In this particular example those are `stream` and `stream-led`. `.js` file is responsible for declaring and registering the component JS-wise. This is absolutely crucial for autodetection and autoload to work. One important caveat here is that each of the components should have a unique "slug". It needs to be the same in the file path, `data.json`, component's `tag` and `url` and `window.component` dict key, otherwise things won't render properly. The `.html` file is basically the content of the component's `iframe`. You can organize it any way you like, but you must include the `zoid`'s and your component's `.js` files.
+
+#### Static and dynamic files
+
+As this project requires a lot of static files, we've made a simple script that should make your life easier when it comes to static files and HTML templates. Files from directories `static` and `dynamic` are converted to C++ code automatically and will be available at the root of your webserver. (Ie. `dynamic/foo.bmp` will be available at `/foo.bmp`.) The only difference is that files in `dynamic` directory will be treated with the [template processor of ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer#template-processing) so you can set some variables like `%VARIABLE_NAME%` using some additional code in your `main.cpp`.
+
+There's one caveat though - ESP32 network stack has a limited number of simultaneous connections available so you need to stay as low as possible for this example to work reliably. One way of dealing with that is using some kind of CDN or an external server tor static files and leaving only dynamic files to be served by ESP32 - there's an example for that near the `STATIC_BASE_URL` definition in `main.cpp`. Whether you use it it's completely up to you.
+
 ## Minimal setup
 
 :::info
