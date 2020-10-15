@@ -1,5 +1,5 @@
 module.exports = {
-  testSidebar: {
+/*  testSidebar: {
     Docusaurus: ['test/doc1', 'test/doc2', 'test/doc3'],
     Features: ['test/mdx'],
   },
@@ -8,7 +8,7 @@ module.exports = {
     'Using Husarnet':['old/getting-started','old/manual-mgmt','old/problems'],
     'Husarnet & ROS':['old/getting-started-ros','old/ros-security'],
     'How it works':['old/info'],
-  },
+  }, */
   docsSidebar: {
     'Getting started':['begin-linux', 'begin-esp32', 'begin-esp32-platformio'],
     'Manuals':['manual-general','manual-client','manual-dashboard', 'manual-selfhosted'],
