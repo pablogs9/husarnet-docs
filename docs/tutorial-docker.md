@@ -30,7 +30,7 @@ For the purposes of this tutorial, we will use the latest (as of today) Ubuntu i
     ENTRYPOINT (husarnet daemon > /dev/null 2>&1 &) && /bin/bash
     ```  
 
-    As mentioned before, I'm using the Ubuntu:20.04 image. 
+    As mentioned before, we're' using the Ubuntu:20.04 image. 
     Feel free to adjust it to your needs.
 
     Also, it is not necessary to add the ```&& /bin/bash``` portion of ```ENTRYPOINT```. It is convenient for this sample use case because it automatically spawns a shell upon running ```docker run ...``` without the need to provide extra arguments. 
@@ -50,4 +50,4 @@ For the purposes of this tutorial, we will use the latest (as of today) Ubuntu i
         docker run -it -v /dev/net/tun:/dev/net/tun --cap-add NET_ADMIN --sysctl net.ipv6.conf.all.disable_ipv6=0 husarnet_client
         ``` 
 
-Having followed the steps above, a shell inside of the container should be spawned. You can now use the client as if you were on a native system.
+Having followed the steps above, a shell inside of the container should be spawned. You can now use the client as if you were using a native system.
