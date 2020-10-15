@@ -30,7 +30,7 @@ For the purposes of this tutorial, we will use the latest (as of today) Ubuntu i
     ENTRYPOINT (husarnet daemon > /dev/null 2>&1 &) && /bin/bash
     ```  
 
-    As mentioned before, we're' using the Ubuntu:20.04 image. 
+    As mentioned before, we're using the Ubuntu:20.04 image. 
     Feel free to adjust it to your needs.
 
     Also, it is not necessary to add the ```&& /bin/bash``` portion of ```ENTRYPOINT```. It is convenient for this sample use case because it automatically spawns a shell upon running ```docker run ...``` without the need to provide extra arguments. 
