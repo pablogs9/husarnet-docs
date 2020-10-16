@@ -59,3 +59,9 @@ You can now run the container. We have two main options here:
 ## Summary
 
 Having followed the steps above, a shell inside of the container should be spawned. You can now use the client as if you were on a native system.
+
+### Disclaimer
+
+It is possible that client inside of a container might not have access to hostnames of other devices in the network. This is caused by unwritable ```/etc/hosts```.
+
+In this case, you will have to use the IPv6 addresses to communicate with other devices. This does not affect hostnames visible by other devices - they can still communicate with the containerized client using its hostname.
