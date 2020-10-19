@@ -1,7 +1,7 @@
 ---
 sidebar_label: ESP32 (beta) - Arduino
 title: Use Husarnet on ESP32 (beta) - Arduino variant
-custom_edit_url: https://github.com/husarnet/husarnet-docs/docs/begin-esp32
+custom_edit_url: https://github.com/husarnet/husarnet-docs/tree/master/docs
 keywords:
   - vpn
   - p2p
@@ -43,7 +43,7 @@ Open Arduino IDE and install the fork of **Arduino core for the ESP32** by follo
 - go to `File -> Preferences`
 - in a field `Additional Board Manager URLs` paste this link:
 ```
-https://files.husarion.com/arduino/package_esp32_husarnet_index.json
+https://github.com/husarnet/arduino-esp32/releases/download/1.0.4-1/package_esp32_index.json
 ```
 
 ![Board Manager URL](/img/getting-started/docs-arduino-url.png)
