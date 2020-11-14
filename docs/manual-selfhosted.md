@@ -83,7 +83,7 @@ The installation script does not support reinstalling right now. However, it is 
 
 ### Linux client
 ```
-sudo husarnet setup-server <adress>
+sudo husarnet setup-server <address>
 sudo systemctl restart husarnet
 ```
 
