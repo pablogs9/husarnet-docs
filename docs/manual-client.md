@@ -236,11 +236,11 @@ johny@johnylaptop:~$ sudo husarnet join fc94:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:932a/
 johny@johnylaptop:~$
 ```
 
-### `setup-server <address>`
+### `setup-server [addr]`
 
 Command used to connect Husarnet Clients to other Husarnet Dashboards and Husarnet Base Servers (eg. in self-hosted plans).
 
-Where `<address>` is the hostname or IP address of the dashboard, e.g. `sudo husarnet setup-server 192.168.1.100`, or `sudo husarnet setup-server app.mydomainwheredashboardisinstalled.com`. 
+Where `[addr]` is the hostname or IP address of the dashboard, e.g. `sudo husarnet setup-server 192.168.1.100`, or `sudo husarnet setup-server app.mydomainwheredashboardisinstalled.com`. 
 
 To use the default Husarnet server by your Linux client go to `/var/lib/husarnet` and remove `license.json` file, then execute `sudo systemctl restart husarnet` on the devices you want to connect. Then run:
 
