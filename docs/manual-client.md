@@ -16,7 +16,7 @@ This manual describes how to use **Husarnet Client** app on Linux. Your devices 
 The simplest way to install Husarnet is to paste the following line into your terminal:
 
 ```bash
-sudo $(curl https://install.husarnet.com/install.sh | bash)
+curl https://install.husarnet.com/install.sh | sudo bash
 ```
 
 After installation process is finished, execute the following command:
