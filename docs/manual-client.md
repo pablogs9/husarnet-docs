@@ -8,7 +8,7 @@ keywords:
 image: https://i.imgur.com/mErPwqL.png
 ---
 
-This manual describes how to use **Husarnet Client** app on Linux. Your devices with **Husarnet Client** installed communicate with each other directly, without any central server forwarding traffic. That is a true low latency, peer-to-peer connection over the internet. Your devices see each other like they were in the same LAN.
+This manual describes how to use **Husarnet Client** app on Linux. Your devices with **Husarnet Client** installed communicate with each other directly, without any central server forwarding traffic. That is a true low latency, peer-to-peer connection over the internet. Your devices see each other like they were in the same LAN.test
 
 ## Installation methods
 
