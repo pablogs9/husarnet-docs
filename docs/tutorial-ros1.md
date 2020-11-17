@@ -25,6 +25,10 @@ Sourcing the `/opt/ros/kinetic/setup.bash` enables all ROS tools.
 
 You can also set `ROS_MASTER_URI` to other hostname - just be aware that Husarnet Dashboard ROS integration might not work as intended.
 
+:::info
+Note that after changing `master` to other device on the Husarnet Dashboard you have to make sure that line starting from `127.0.01` in `/etc/hosts` file  contain host `master`. Husarnet doesn't change this automatically for now.
+:::
+
 ## Use ROS
 
 Run `roscore` on the device selected as master in Husarnet Dashboard. Now you can use ROS on all devices connected via Husarnet as if they were one device.
