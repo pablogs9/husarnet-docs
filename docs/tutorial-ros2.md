@@ -10,9 +10,9 @@ image: https://i.imgur.com/mErPwqL.png
 
 ## Husarnet and DDS Implementation
 
-Both ROS1 and ROS2 allows you to run nodes on different physical machines as long as they are in the same LAN network. To run ROS on robotic system distributed among multiple networks VPN needs to be used. Husarnet is a peer-to-peer, low-latency and lightweight VPN dedicated for robotics applications. In this short guide we will show you how to configure ROS2 together with Husarnet VPN client.
+Both ROS 1 and ROS 2 allow you to run nodes on different physical machines as long as they are in the same LAN network. In order to run ROS on robotic systems distributed over multiple networks, VPN needs to be used. Husarnet is a peer-to-peer, low-latency and lightweight VPN designed to address robotics applications. In this short guide we will show how to configure ROS 2 to make it work with Husarnet VPN client.
 
-To use Husarnet with DDS it is needed some preconfiguration. It depends on which DDS implementation is used, but generally peers from husarnet should be added to configuration file. Below is a demonstration of how to use Husarnet running on top of ROS 2. 
+To use Husarnet with DDS some preconfiguration is needed. The specific configuration depends on which DDS implementation is used, but generally peers from Husarnet should be added to an XML configuration file. Below we provide a demonstration of how to use Husarnet running on top of ROS 2, with [Fast DDS](https://fast-dds.docs.eprosima.com/en/latest/) as the underlying middleware. 
 
 ### Install Husarnet:
 
@@ -20,11 +20,11 @@ Execute this command on each physical device you need to connect.
 ```
 curl https://install.husarnet.com/install.sh | sudo bash
 ```
-Remember to run `sudo systemctl restart husarnet` after installation process is finished.
+Remember to run `sudo systemctl restart husarnet` after the installation process is complete.
 
 ### Configure husarnet network:
 
-Add your physical devices to the same Husarnet network, by executing following commands on each of them:
+Add your physical devices to the same Husarnet network, by executing the following command on each of them:
 
 `husarnet join <your-join-code> <mydevice-hostname>`
 
@@ -32,13 +32,13 @@ Add your physical devices to the same Husarnet network, by executing following c
 <img alt="" src="/docs/assets/img/husarnet-cyclone-dds/join-code.png" width="900px" />
 </center></div>
 
-More information at: [Husarnet](https://docs.husarnet.com/)
+Find more information at: [Husarnet](https://docs.husarnet.com/).
 
 ## Husarnet and ROS 2
 
-Create a FastDDS configuration file in your ROS 2 workspace: `~/ros2_ws/fastdds_husarnet.xml`
+Create a Fast DDS configuration file in your ROS 2 workspace: `~/ros2_ws/fastdds_husarnet.xml`
 
-To make communication work you have to set some params in the following template.
+To make the communication work, you have to set some parameters as shown in the following template.
 
 **IMPORTANT**: Provide **all** peers under `initialPeersList` tag.
 
@@ -84,14 +84,14 @@ To make communication work you have to set some params in the following template
 
 ```
 
-Set this file as default profiles in `.bashrc` file to use that configuration every time you boot your system. Open a new terminal and execute:
+Set this file as default profile in your `.bashrc` file, so as to use this configuration every time you boot your system. Open a new terminal and execute:
 
 ```bash
 echo "export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/ros2_ws/fastdds_husarnet.xml" >> ~/.bashrc
 . ~/.bashrc
 ```
 
-Now you will be able to use your default ROS 2 tools with husarnet:
+Now you will be able to use your default ROS 2 tools with Husarnet:
 
 ```bash
 # On one node:
