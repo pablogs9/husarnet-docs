@@ -10,11 +10,9 @@ image: https://i.imgur.com/mErPwqL.png
 
 ## Husarnet and DDS Implementation
 
-To use Husarnet with DDS it is needed some preconfiguration. It depends on which DDS implementation is used, but generally peers from husarnet should be added to configuration file. Below is a demonstration of how to use Husarnet with Eclipse Cyclone DDS running on top of ROS2 Dashing. 
+Both ROS1 and ROS2 allows you to run nodes on different physical machines as long as they are in the same LAN network. To run ROS on robotic system distributed among multiple networks VPN needs to be used. Husarnet is a peer-to-peer, low-latency and lightweight VPN dedicated for robotics applications. In this short guide we will show you how to configure ROS2 together with Husarnet VPN client.
 
-## Using Husarnet with Eclipse Cyclone DDS
-
-Both ROS1 and ROS2 allows you to run nodes on different physical machines as long as they are in the same LAN network. To run ROS on robotic system distributed among multiple networks VPN needs to be used. Husarnet is a peer-to-peer, low-latency and lightweight VPN dedicated for robotics applications. In this short guide we will show you how to configure ROS2 using Eclipse Cyclone DDS together with Husarnet VPN client.
+To use Husarnet with DDS it is needed some preconfiguration. It depends on which DDS implementation is used, but generally peers from husarnet should be added to configuration file. Below is a demonstration of how to use Husarnet running on top of ROS 2. 
 
 ### Install Husarnet:
 
@@ -36,7 +34,73 @@ Add your physical devices to the same Husarnet network, by executing following c
 
 More information at: [Husarnet](https://docs.husarnet.com/)
 
-## Cyclone DDS
+## Husarnet and ROS 2
+
+Create a FastDDS configuration file in your ROS 2 workspace: `~/ros2_ws/fastdds_husarnet.xml`
+
+To make communication work you have to set some params in the following template.
+
+**IMPORTANT**: Provide **all** peers under `initialPeersList` tag.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+    <transport_descriptors>
+        <transport_descriptor>
+            <transport_id>HusarnetTransport</transport_id>
+            <type>UDPv6</type>
+        </transport_descriptor>
+    </transport_descriptors>
+
+    <participant profile_name="CustomHusarnetParticipant" is_default_profile="true">
+        <rtps>
+            <useBuiltinTransports>false</useBuiltinTransports>
+            <userTransports>
+                <transport_id>HusarnetTransport</transport_id>
+            </userTransports>
+            <builtin>
+                <metatrafficUnicastLocatorList>
+                    <locator>
+                        <udpv6>
+                            <address>fc94:cbe:b38c:67a:94f2:7811:4d97:4c6d</address>
+                            <port>7412</port>
+                        </udpv6>
+                    </locator>
+                </metatrafficUnicastLocatorList>
+                <initialPeersList>
+                <!-- Repeat this part for each husernet peer -->
+                    <locator>
+                        <udpv6>
+                            <address>[IPV6-address]</address>
+                            <port>7412</port>
+                        </udpv6>
+                    </locator>
+                <!-- End repeat -->
+                </initialPeersList>
+            </builtin>
+        </rtps>
+    </participant>
+</profiles>
+
+```
+
+Set this file as default profiles in `.bashrc` file to use that configuration every time you boot your system. Open a new terminal and execute:
+
+```bash
+echo "export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/ros2_ws/fastdds_husarnet.xml" >> ~/.bashrc
+. ~/.bashrc
+```
+
+Now you will be able to use your default ROS 2 tools with husarnet:
+
+```bash
+# On one node:
+ros2 topic pub /test_topic std_msgs/Int32 '{data: 1}'
+
+# On the other node:
+ros2 topic echo /test_topic
+```
+## Using Husarnet with Eclipse Cyclone DDS
 
 ### Install Cyclone DDS middleware: 
 
