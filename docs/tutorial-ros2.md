@@ -54,19 +54,10 @@ To make the communication work, you have to set some parameters as shown in the 
 
     <participant profile_name="CustomHusarnetParticipant" is_default_profile="true">
         <rtps>
-            <useBuiltinTransports>false</useBuiltinTransports>
             <userTransports>
                 <transport_id>HusarnetTransport</transport_id>
             </userTransports>
             <builtin>
-                <metatrafficUnicastLocatorList>
-                    <locator>
-                        <udpv6>
-                            <address>fc94:cbe:b38c:67a:94f2:7811:4d97:4c6d</address>
-                            <port>7412</port>
-                        </udpv6>
-                    </locator>
-                </metatrafficUnicastLocatorList>
                 <initialPeersList>
                 <!-- Repeat this part for each husernet peer -->
                     <locator>
@@ -81,7 +72,6 @@ To make the communication work, you have to set some parameters as shown in the 
         </rtps>
     </participant>
 </profiles>
-
 ```
 
 Set this file as default profile in your `.bashrc` file, so as to use this configuration every time you boot your system. Open a new terminal and execute:
